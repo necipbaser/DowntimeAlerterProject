@@ -14,7 +14,7 @@ using DowntimeAlerter.MVC.ActionFilters;
 namespace DowntimeAlerter.MVC.Controllers
 {
     [ServiceFilter(typeof(LoginFilterAttribute))]
-    public class SiteController : Controller
+    public class SiteController : Controller 
     {
         private readonly ILogger<SiteController> _logger;
         private readonly ISiteService _siteService;
