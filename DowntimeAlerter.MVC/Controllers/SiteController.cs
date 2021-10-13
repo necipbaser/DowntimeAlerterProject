@@ -21,6 +21,7 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly ISiteEmailService _siteEmailService;
         private readonly IMapper _mapper;
 
+
         public SiteController(ISiteService siteService, ISiteEmailService siteEmailService, IMapper mapper)
         {
             this._mapper = mapper;
