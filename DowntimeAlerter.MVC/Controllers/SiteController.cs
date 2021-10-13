@@ -22,7 +22,7 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly IMapper _mapper;
 
 
-        public SiteController(ISiteService siteService, ISiteEmailService siteEmailService, IMapper mapper,ILogger logger)
+        public SiteController(ISiteService siteService, ISiteEmailService siteEmailService, IMapper mapper, ILogger<SiteController> logger)
         {
             this._mapper = mapper;
             this._siteService = siteService;
