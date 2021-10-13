@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "Add Site";
+    Layout = null;
+}
+<style>
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 10px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 12px !important;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            <span class="kt-portlet__head-icon">
+                <i class="flaticon-add"></i>
+            </span>Add New Site
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body" style="background-color: #f1f0f0">
+        <div class="row" style="color:black!important">
+            <div class="col-6">
+                <div class="kt-portlet" style=" height: 300px;">
+                    <div class="kt-portlet__body">
+                        <!--begin::Section-->
+                        <div class="kt-section">
+                            <div class="kt-section__content">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Site Name <span style="color:red">*</span></label>
+                                            <input class="form-control" type="text" value="" placeholder="Site name..." id="txtSiteName">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <input class="form-control" type="text" value="" placeholder="Url..." id="txtSiteUrl">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Interval Time (ms)<span style="color:red">*</span></label>
+                                            <input class="form-control" type="number" placeholder="Interval time..." id="txtIntervalTime">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="kt-portlet" style=" height: 300px;">
+                    <div class="kt-portlet__body">
+                        <!--begin::Section-->
+                        <div class="kt-section">
+                            <div class="kt-section__content">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-lg-2 col-sm-12">Email <span style="color:red">*</span></label>
+                                            <div class="col-lg-10 col-md-10 col-sm-12">
+                                                <input type="text" value="" class="form-control" name="email" id="txtEmail" placeholder="Enter email..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <button class="btn btn-brand btn-block" onclick="AddSite.AddEmail()">
+                                            <i class="flaticon-add"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Email</th>
+                                                    <th style=" width: 10px;"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblAddedEmail"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="button" style="float:right; width:200px" class="btn btn-success" onclick="AddSite.Save()"><i class="fa fa-save"></i>Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/Site/AddSite.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+        eval("AddSite.Init();");
+    });
+</script>

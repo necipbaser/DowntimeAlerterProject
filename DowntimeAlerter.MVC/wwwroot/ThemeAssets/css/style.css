@@ -1,0 +1,7 @@
+﻿.blockUI {
+    z-index: 9999 !important;
+}
+
+.blockMsg {
+    z-index: 9999 !important;
+}
