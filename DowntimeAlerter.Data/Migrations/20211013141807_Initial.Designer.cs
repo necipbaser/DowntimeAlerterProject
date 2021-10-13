@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DowntimeAlerter.Data.Migrations
 {
     [DbContext(typeof(DowntimeAlerterDbContext))]
-    [Migration("20211013112638_Initial")]
+    [Migration("20211013141807_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
