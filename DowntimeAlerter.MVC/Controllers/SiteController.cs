@@ -19,7 +19,8 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly ILogger<SiteController> _logger;
         private readonly ISiteService _siteService;
         private readonly ISiteEmailService _siteEmailService;
-        private readonly IMapper _mapper;
+        private readonly IMapper _mapper; 
+
 
         public SiteController(ISiteService siteService, ISiteEmailService siteEmailService, IMapper mapper, ILogger<SiteController> logger)
         {
