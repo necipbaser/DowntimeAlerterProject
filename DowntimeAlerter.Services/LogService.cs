@@ -15,6 +15,11 @@ namespace DowntimeAlerter.Services
             this._unitOfWork = unitOfWork;
         }
 
+        public async Task<Log> GetLog(int id)
+        {
+            return await _unitOfWork.Logs.GetLog(id);
+        }
+
         public async Task<IEnumerable<Log>> GetLogs()
         {
             return await _unitOfWork.Logs.GetLogsAsync();

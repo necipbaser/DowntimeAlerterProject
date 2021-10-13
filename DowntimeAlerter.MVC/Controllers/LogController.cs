@@ -36,5 +36,13 @@ namespace DowntimeAlerter.MVC.Controllers
             var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs);
             return Json(new { data = logsDto });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> LogDetails(int id)
+        {
+            var log = await _logService.GetLog(id);
+            var logDTO = _mapper.Map<Log, LogDTO>(log);
+            return View(logDTO);
+        }
     }
 }

@@ -19,6 +19,12 @@ namespace DowntimeAlerter.Data.Repositories
             return await DowntimeAlerterDbContext.Logs.ToListAsync();
         }
 
+        public async Task<Log> GetLog(int id)
+        {
+            return await DowntimeAlerterDbContext.Logs
+                .SingleOrDefaultAsync(m => m.Id == id);
+        }
+
         private DowntimeAlerterDbContext DowntimeAlerterDbContext
         {
             get { return Context as DowntimeAlerterDbContext; }
