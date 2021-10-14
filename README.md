@@ -4,8 +4,6 @@ In this project used;
 
 
 -Asp.Net Core MVC
-
-
 -Entity Framework
 
 
