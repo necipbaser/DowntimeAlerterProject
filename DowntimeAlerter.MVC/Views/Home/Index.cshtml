@@ -2,14 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-
-
-    <div class="row" style="padding-bottom: 1%;">
+    <div class="row" style="padding-bottom: 3%;">
         <h3 style="margin: 0 auto;">Downtime Alerter Dashboard</h3>
     </div>
     <div class="row">
         <div class="col-lg-4">
-            <div class="kt-portlet kt-iconbox kt-iconbox--info kt-iconbox--animate-slow">
+            <div class="kt-portlet kt-iconbox kt-iconbox--danger kt-iconbox--animate-slow">
                 <div class="kt-portlet__body">
                     <div class="kt-iconbox__body">
                         <div class="kt-iconbox__icon">
@@ -29,7 +27,7 @@
                         </div>
                         <div class="kt-iconbox__desc">
                             <h3 class="kt-iconbox__title">
-                                <label style="font-size:17px" class="kt-link">Total Site Count</label>
+                                <label style="font-size:17px" class="kt-link">Total Number of Sites</label>
                             </h3>
                             <div class="kt-iconbox__content">@ViewBag.SiteCount</div>
                         </div>
@@ -58,7 +56,7 @@
                         </div>
                         <div class="kt-iconbox__desc">
                             <h3 class="kt-iconbox__title">
-                                <label style="font-size:17px" class="kt-link">Total Email Count</label>
+                                <label style="font-size:17px" class="kt-link">Total Number of Emails</label>
                             </h3>
                             <div class="kt-iconbox__content">@ViewBag.SiteEmailCount</div>
                         </div>
@@ -88,7 +86,7 @@
                         </div>
                         <div class="kt-iconbox__desc">
                             <h3 class="kt-iconbox__title">
-                                <label style="font-size:17px" class="kt-link">Total Notification Count</label>
+                                <label style="font-size:17px" class="kt-link">Total Number of Notifications</label>
                             </h3>
                             <div class="kt-iconbox__content">@ViewBag.NotificationLogsCount</div>
                         </div>

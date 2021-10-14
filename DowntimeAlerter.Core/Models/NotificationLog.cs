@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DowntimeAlerter.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace DowntimeAlerter.Core.Models
         public string State { get; set; }
         public string Message { get; set; }
         public string SiteName { get; set; }
+        public NotificationType NotificationType { get; set; }
         public DateTime CheckedDate { get; set; }
     }
 }

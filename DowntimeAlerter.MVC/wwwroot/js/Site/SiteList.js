@@ -22,9 +22,12 @@ var SiteList = {
         Util.Ajax.Generic("Site", "DeleteSite", SiteList.CallBackDeleteSite, formData, true,"DELETE");
     },
     CallBackDeleteSite: function (response) {
-        if (response.data == true) {
+        if (response.success == true) {
+            Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             SiteList.LoadFormData();
             return Util.Notification.Swall("success", "The site was deleted.", "Info", "Ok", false);
+        } else {
+            return Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);
         }
     },
 }

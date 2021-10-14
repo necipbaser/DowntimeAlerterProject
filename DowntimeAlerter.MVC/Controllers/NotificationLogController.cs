@@ -45,7 +45,6 @@ namespace DowntimeAlerter.MVC.Controllers
                 _logger.LogError(ex.Message);
                 return Json(new { data = false });
             }
-
         }
     }
 }

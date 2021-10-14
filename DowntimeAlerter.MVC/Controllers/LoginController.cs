@@ -29,7 +29,6 @@ namespace DowntimeAlerter.MVC.Controllers
 
         public IActionResult Login()
         {
-            _logger.LogInformation("init log");
             return View();
         }
 
@@ -72,15 +71,23 @@ namespace DowntimeAlerter.MVC.Controllers
         [HttpGet]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete(ProjectConstants.CookieName);
-            //remove hangfire job
-            using (var connection = JobStorage.Current.GetConnection())
+            try
             {
-                foreach (var recurringJob in connection.GetRecurringJobs())
+                Response.Cookies.Delete(ProjectConstants.CookieName);
+                //remove hangfire job
+                using (var connection = JobStorage.Current.GetConnection())
                 {
-                    RecurringJob.RemoveIfExists(recurringJob.Id);
+                    foreach (var recurringJob in connection.GetRecurringJobs())
+                    {
+                        RecurringJob.RemoveIfExists(recurringJob.Id);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
             return RedirectToAction("Login");
         }
     }

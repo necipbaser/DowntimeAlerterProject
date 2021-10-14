@@ -15,7 +15,7 @@ namespace DowntimeAlerter.Data.Repositories
 
         public Repository(DbContext context)
         {
-            this.Context = context;
+            Context = context;
         }
         public async Task AddAsync(TEntity entity)
         {

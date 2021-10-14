@@ -16,6 +16,7 @@ namespace DowntimeAlerter.Data.Migrations
                     State = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     SiteName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    NotificationType = table.Column<int>(type: "int", nullable: false),
                     CheckedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -72,28 +73,30 @@ namespace DowntimeAlerter.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
             migrationBuilder.CreateTable(
-    name: "Logs",
-    columns: table => new
-    {
-        Id = table.Column<int>(type: "int", nullable: false)
-            .Annotation("SqlServer:Identity", "1, 1"),
-        Message = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-        MessageTemplate = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-        Level = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-        TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-        Exception = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-        Properties = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true)
-    });
-            migrationBuilder.InsertData(
-                table: "Sites",
-                columns: new[] { "Id", "IntervalTime", "Name", "Url" },
-                values: new object[] { 1, 60L, "Google", "https://google.com" });
+                    name: "Logs",
+                    columns: table => new
+                    {
+                        Id = table.Column<int>(type: "int", nullable: false)
+                            .Annotation("SqlServer:Identity", "1, 1"),
+                        Message = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                        MessageTemplate = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                        Level = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                        TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                        Exception = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                        Properties = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true)
+                    });
 
             migrationBuilder.InsertData(
                 table: "Sites",
                 columns: new[] { "Id", "IntervalTime", "Name", "Url" },
-                values: new object[] { 2, 70L, "Down Site Example", "https://example.org/impolite" });
+                values: new object[] { 1, 20, "Google", "https://google.com" });
+
+            migrationBuilder.InsertData(
+                table: "Sites",
+                columns: new[] { "Id", "IntervalTime", "Name", "Url" },
+                values: new object[] { 2, 30, "Down Site Example", "https://example.org/impolite" });
 
             migrationBuilder.InsertData(
                 table: "Users",

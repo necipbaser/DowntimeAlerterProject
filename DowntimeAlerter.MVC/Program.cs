@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DowntimeAlerter.MVC.Notification;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,13 +35,6 @@ namespace DowntimeAlerter.MVC
                 Log.CloseAndFlush();
             }
         }
-
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //    Host.CreateDefaultBuilder(args)
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //{
-        //    webBuilder.UseStartup<Startup>();
-        //});
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {

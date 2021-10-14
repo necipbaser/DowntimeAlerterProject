@@ -96,7 +96,7 @@ var EditSite = {
         Util.Ajax.Generic("Site", "DeleteSiteEmail", EditSite.CallBackDeleteSiteEmail, formData, true, "DELETE");
     },
     CallBackDeleteSiteEmail: function (response) {
-        if (response.data == true) {
+        if (response.success == true) {
             Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             EditSite.GetSiteEmailList();
             return Util.Notification.Swall("success", "The site email was deleted.", "Info", "Ok", false);

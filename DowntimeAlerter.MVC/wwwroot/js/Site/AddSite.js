@@ -17,8 +17,8 @@ var AddSite = {
             return Util.Notification.Swall("warning", "Site name cannot be empty!", "Error", "Ok", false);
         if (siteUrl == "")
             return Util.Notification.Swall("warning", "Site Url cannot be empty!", "Error", "Ok", false);
-        if (siteIntervalTime < 60)
-            return Util.Notification.Swall("warning", "The Interval Time must be greater than 60 seconds.", "Error", "Ok", false);
+        if (siteIntervalTime < 30)
+            return Util.Notification.Swall("warning", "The Interval Time must be greater or equal 30 seconds.", "Error", "Ok", false);
 
         if (addedEmailList.length < 1)
             return Util.Notification.Swall("warning", "Please enter at least 1 e-mail address.", "Error", "Ok", false);
@@ -40,7 +40,7 @@ var AddSite = {
     },
     CallbackSave: function (response) {
         Util.BlockUI.UnBlock();
-        if (response.data == true) {
+        if (response.success == true) {
             Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             SiteList.LoadFormData();
             $("#responsive-modal").modal("toggle");

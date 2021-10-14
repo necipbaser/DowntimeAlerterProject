@@ -12,11 +12,12 @@ using DowntimeAlerter.MVC.DTO;
 using System.Net.Http;
 using System.Net;
 using MimeKit;
-using DowntimeAlerter.MVC.Notification.Settings;
 using Microsoft.Extensions.Options;
 using MailKit.Security;
 using MailKit.Net.Smtp;
 using Hangfire.Storage;
+using DowntimeAlerter.Core.Utilities;
+using DowntimeAlerter.Core.Enums;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
@@ -80,6 +81,7 @@ namespace DowntimeAlerter.MVC.Controllers
                             notificaitionLog.Message = message;
                             notificaitionLog.SiteName = item.Name;
                             notificaitionLog.State = "Name Not Resolved";
+                            notificaitionLog.NotificationType = NotificationType.Email;
                             SaveNotificatonLog(notificaitionLog);
                             _logger.LogError("An error occured for " + item.Name + " while checking health of it. System Message:" +
                                 ex.Message);
@@ -109,6 +111,7 @@ namespace DowntimeAlerter.MVC.Controllers
                     notificaitionLog.Message = message;
                     notificaitionLog.SiteName = site.Name;
                     notificaitionLog.State = "Up";
+                    notificaitionLog.NotificationType = NotificationType.Email;
                     SaveNotificatonLog(notificaitionLog);
                     request.Body = message;
                 }
@@ -118,6 +121,7 @@ namespace DowntimeAlerter.MVC.Controllers
                     notificaitionLog.Message = message;
                     notificaitionLog.SiteName = site.Name;
                     notificaitionLog.State = "Down";
+                    notificaitionLog.NotificationType = NotificationType.Email;
                     SaveNotificatonLog(notificaitionLog);
                     request.Body = message;
                 }

@@ -16,7 +16,7 @@ namespace DowntimeAlerter.Data
 
         public UnitOfWork(DowntimeAlerterDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public ISiteEmailRepository SiteEmails => _siteEmailRepository = _siteEmailRepository ?? new SiteEmailRepository(_context);

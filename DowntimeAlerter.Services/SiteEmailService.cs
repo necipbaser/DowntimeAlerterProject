@@ -11,7 +11,7 @@ namespace DowntimeAlerter.Services
         private readonly IUnitOfWork _unitOfWork;
         public SiteEmailService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<SiteEmail> CreateSiteEmail(SiteEmail newSiteEmail)

@@ -178,12 +178,12 @@
                                                 <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3"></path>
                                             </g>
                                         </svg>
-                                    </span><span class="kt-menu__link-text">Logs</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </span><span class="kt-menu__link-text">Notification Logs</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
                                 </a>
                                 <div class="kt-menu__submenu " kt-hidden-height="120" style="">
                                     <span class="kt-menu__arrow"></span>
                                     <ul class="kt-menu__subnav">
-                                        <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index","Log")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Log List</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index","NotificationLog")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Notification Log List</span></a></li>
 
                                     </ul>
                                 </div>
@@ -198,12 +198,12 @@
                                                 <path d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z" fill="#000000" opacity="0.3"></path>
                                             </g>
                                         </svg>
-                                    </span><span class="kt-menu__link-text">Notification Logs</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                    </span><span class="kt-menu__link-text">Logs</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
                                 </a>
                                 <div class="kt-menu__submenu " kt-hidden-height="120" style="">
                                     <span class="kt-menu__arrow"></span>
                                     <ul class="kt-menu__subnav">
-                                        <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index","NotificationLog")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Notification Log List</span></a></li>
+                                        <li class="kt-menu__item " aria-haspopup="true"><a href="@Url.Action("Index","Log")" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Log List</span></a></li>
 
                                     </ul>
                                 </div>
@@ -222,30 +222,15 @@
                     <!-- end:: Header Menu -->
                     <!-- begin:: Header Topbar -->
                     <div class="kt-header__topbar">
-                        <!--begin: Quick panel toggler -->
-                        <div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-toggle="kt-tooltip" title="Bildirimler" data-placement="right">
-                            <span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
-                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <rect x="0" y="0" width="24" height="24" />
-                                        <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                        <path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
-                                    </g>
-                                </svg>
-                            </span>
-                            <span style="display: none;" id="NotificationCountPanel" class="kt-nav__link-badge">
-                                <span id="NotificationCount" class="kt-badge kt-badge--success"></span>
-                            </span>
-                        </div>
-                        <!--end: Quick panel toggler -->
-                        <!--begin: User Bar -->
                         <div class="kt-header__topbar-item kt-header__topbar-item--user">
                             <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
-                                <div class="kt-header__topbar-user">
-                                    <span class="kt-header__topbar-welcome kt-hidden-mobile">user </span>
+                                <div class="kt-header__topbar-user" style=" background-color: #363636;">
+                                    <span class="kt-header__topbar-welcome kt-hidden-mobile" style="color:white">User</span>
                                     @*<img class="kt-hidden" alt="Pic" src="~/ThemeAssets/media/users/300_25.jpg" />*@
                                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold"></span>
+                                <span class="kt-badge kt-badge--username kt-badge--unified-light kt-badge--lg kt-badge--rounded kt-badge--bold">
+                                    <i class="flaticon2-user"></i>
+                                </span>
                                 </div>
                             </div>
                             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
@@ -254,7 +239,7 @@
                                     <div class="kt-user-card__avatar">
                                         @*<img class="kt-hidden" alt="Pic" src="~/ThemeAssets/media/users/300_25.jpg" />*@
                                         <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                                        <span class="kt-badge kt-badge--rounded kt-badge--bold kt-font-success" style="width:100%;font-size:15px">user </span>
+                                        <span class="kt-badge kt-badge--rounded kt-badge--bold kt-font-success" style="color: white !important; padding: 20px; width: 100%; font-size: 15px">user </span>
                                     </div>
                                     <div class="kt-user-card__name">
                                     </div>

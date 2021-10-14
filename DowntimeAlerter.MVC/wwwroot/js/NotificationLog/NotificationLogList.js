@@ -17,7 +17,7 @@ var columns = [{
 },
 {
     data: 'state',
-    title: 'Type',
+    title: 'Status',
     width: '4%',
     render: function (data, type, full, meta) {
         var returnValue = full.state;
@@ -29,7 +29,20 @@ var columns = [{
             returnValue = '<span><span style="width: 150px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-warning">' + full.state + '</span></span>';
         return returnValue;
     }
-},
+    },
+    {
+        data: 'notificationType',
+        title: 'Notification Type',
+        width: '4%',
+        render: function (data, type, full, meta) {
+            var returnValue = "";
+            if (full.notificationType == "1")
+                returnValue = '<span style="width:100px;font-weight:600" class="kt-badge kt-badge--warning kt-badge--md kt-badge--rounded">Email</span>';
+            if (full.notificationType == "2")
+                returnValue = '<span style="width:100px;font-weight:600" class="kt-badge kt-badge--info kt-badge--md kt-badge--rounded">SMS</span>';
+            return returnValue;
+        }
+    },
 {
     data: 'siteName',
     title: 'Name',

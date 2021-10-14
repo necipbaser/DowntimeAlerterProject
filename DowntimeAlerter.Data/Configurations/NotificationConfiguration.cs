@@ -34,6 +34,9 @@ namespace DowntimeAlerter.Data.Configurations
                 .HasMaxLength(100);
 
             builder
+                .Property(m => m.NotificationType)
+                .IsRequired();
+            builder
                 .ToTable("NotificationLogs");
         }
     }

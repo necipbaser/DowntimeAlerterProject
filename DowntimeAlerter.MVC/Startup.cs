@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DowntimeAlerter.Core;
 using DowntimeAlerter.Core.Services;
+using DowntimeAlerter.Core.Utilities;
 using DowntimeAlerter.Data;
 using DowntimeAlerter.MVC.ActionFilters;
-using DowntimeAlerter.MVC.Notification;
-using DowntimeAlerter.MVC.Notification.Settings;
 using DowntimeAlerter.Services;
 using Hangfire;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +29,6 @@ namespace DowntimeAlerter.MVC
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -55,15 +52,7 @@ namespace DowntimeAlerter.MVC
             services.AddHangfire(x =>x.UseSqlServerStorage("Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true"));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
-            //services.AddSingleton<IWorker, Worker>();
-
-            //services.AddScoped<IEmailSender, EmailSender>();
-            //services.AddHostedService<CheckSite>();
-            //services.AddScoped<IEmailSender, EmailSender>();
-
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -73,16 +62,12 @@ namespace DowntimeAlerter.MVC
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

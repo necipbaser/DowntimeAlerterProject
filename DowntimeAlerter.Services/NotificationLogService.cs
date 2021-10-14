@@ -14,7 +14,7 @@ namespace DowntimeAlerter.Services
         private readonly IUnitOfWork _unitOfWork;
         public NotificationLogService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<NotificationLog>> GetLogs()

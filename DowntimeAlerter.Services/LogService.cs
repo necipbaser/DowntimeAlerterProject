@@ -12,7 +12,7 @@ namespace DowntimeAlerter.Services
         private readonly IUnitOfWork _unitOfWork;
         public LogService(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Log> GetLog(int id)
