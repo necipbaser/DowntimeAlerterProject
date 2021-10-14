@@ -7,5 +7,6 @@ In this project used;
 -Jquery
 -Hangfire
 -AutoMapper
+-Serilog
 
 Necip Başer
