@@ -44,7 +44,7 @@ namespace DowntimeAlerter.MVC
             .ConfigureLogging(logging =>
             {
                 logging.AddSerilog();
-            })
+            }).UseSerilog()
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();

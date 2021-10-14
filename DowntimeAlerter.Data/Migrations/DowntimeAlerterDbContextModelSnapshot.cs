@@ -97,6 +97,22 @@ namespace DowntimeAlerter.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sites");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IntervalTime = 60L,
+                            Name = "Google",
+                            Url = "https://google.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IntervalTime = 70L,
+                            Name = "Down Site Example",
+                            Url = "https://example.org/impolite"
+                        });
                 });
 
             modelBuilder.Entity("DowntimeAlerter.Core.Models.SiteEmail", b =>
@@ -121,6 +137,20 @@ namespace DowntimeAlerter.Data.Migrations
                     b.HasIndex("SiteId");
 
                     b.ToTable("SiteEmails");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "necipbaser71@gmail.com",
+                            SiteId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "necipbaser71@gmail.com",
+                            SiteId = 2
+                        });
                 });
 
             modelBuilder.Entity("DowntimeAlerter.Core.Models.User", b =>
@@ -156,7 +186,7 @@ namespace DowntimeAlerter.Data.Migrations
                         {
                             Id = 1,
                             Name = "Necip Baser",
-                            Password = "$MYHASH$V1$10000$ypt07yU/6uDB1DKWhssk74PQnL5jDfMy56t61pU1ZTXK5Tv1",
+                            Password = "$MYHASH$V1$10000$RF6L72YL97FCEHbrmlNcTMyByddGcIDOslSZLYa5qsqgIFAw",
                             UserName = "user"
                         });
                 });

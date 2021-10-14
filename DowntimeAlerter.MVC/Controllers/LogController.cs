@@ -37,7 +37,7 @@ namespace DowntimeAlerter.MVC.Controllers
             try
             {
                 var logs = await _logService.GetLogs();
-                var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs).OrderByDescending(o => o.TimeStamp);
+                var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs).OrderByDescending(o => o.TimeStamp).Take(1000);
                 return Json(new { data = logsDto });
             }
             catch (Exception ex)

@@ -74,9 +74,29 @@ namespace DowntimeAlerter.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Sites",
+                columns: new[] { "Id", "IntervalTime", "Name", "Url" },
+                values: new object[] { 1, 60L, "Google", "https://google.com" });
+
+            migrationBuilder.InsertData(
+                table: "Sites",
+                columns: new[] { "Id", "IntervalTime", "Name", "Url" },
+                values: new object[] { 2, 70L, "Down Site Example", "https://example.org/impolite" });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "Password", "UserName" },
-                values: new object[] { 1, "Necip Baser", "$MYHASH$V1$10000$ypt07yU/6uDB1DKWhssk74PQnL5jDfMy56t61pU1ZTXK5Tv1", "user" });
+                values: new object[] { 1, "Necip Baser", "$MYHASH$V1$10000$RF6L72YL97FCEHbrmlNcTMyByddGcIDOslSZLYa5qsqgIFAw", "user" });
+
+            migrationBuilder.InsertData(
+                table: "SiteEmails",
+                columns: new[] { "Id", "Email", "SiteId" },
+                values: new object[] { 1, "necipbaser71@gmail.com", 1 });
+
+            migrationBuilder.InsertData(
+                table: "SiteEmails",
+                columns: new[] { "Id", "Email", "SiteId" },
+                values: new object[] { 2, "necipbaser71@gmail.com", 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SiteEmails_SiteId",

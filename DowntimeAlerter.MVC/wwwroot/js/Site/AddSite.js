@@ -101,7 +101,9 @@ var AddSite = {
             $("#urlCheckIcon").css("color", "red");
         }
     },
-    UrlChecker: function (url) {
-        
+    RemoveSpace: function () {
+        var email = $("#txtEmail").val();
+        email = email.replace(/\s/g, '');
+        $("#txtEmail").val(email);
     }
 }

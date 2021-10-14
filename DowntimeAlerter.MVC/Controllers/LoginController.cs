@@ -9,6 +9,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using DowntimeAlerter.Core.Utilities;
 using DowntimeAlerter.MVC.Models;
+using Hangfire;
+using Hangfire.Storage;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
@@ -42,7 +44,7 @@ namespace DowntimeAlerter.MVC.Controllers
                 {
                     var returnUser = await _userService.GetUserAsync(user);
                     string hashedPassword = SecurePasswordHasher.Hash(model.Password);
-                    bool passwordIsCorrect = SecurePasswordHasher.Verify(model.Password,hashedPassword);
+                    bool passwordIsCorrect = SecurePasswordHasher.Verify(model.Password, hashedPassword);
                     if (returnUser != null && passwordIsCorrect)
                     {
                         //add cookie and return
@@ -70,6 +72,14 @@ namespace DowntimeAlerter.MVC.Controllers
         public IActionResult Logout()
         {
             Response.Cookies.Delete(ProjectConstants.CookieName);
+            //remove hangfire job
+            using (var connection = JobStorage.Current.GetConnection())
+            {
+                foreach (var recurringJob in connection.GetRecurringJobs())
+                {
+                    RecurringJob.RemoveIfExists(recurringJob.Id);
+                }
+            }
             return RedirectToAction("Login");
         }
     }
