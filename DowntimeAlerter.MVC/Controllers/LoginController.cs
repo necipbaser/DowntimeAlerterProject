@@ -29,6 +29,7 @@ namespace DowntimeAlerter.MVC.Controllers
 
         public IActionResult Login()
         {
+            _logger.LogInformation("init log");
             return View();
         }
 

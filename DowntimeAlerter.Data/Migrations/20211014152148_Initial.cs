@@ -72,7 +72,19 @@ namespace DowntimeAlerter.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
+            migrationBuilder.CreateTable(
+    name: "Logs",
+    columns: table => new
+    {
+        Id = table.Column<int>(type: "int", nullable: false)
+            .Annotation("SqlServer:Identity", "1, 1"),
+        Message = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+        MessageTemplate = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+        Level = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+        TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+        Exception = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+        Properties = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true)
+    });
             migrationBuilder.InsertData(
                 table: "Sites",
                 columns: new[] { "Id", "IntervalTime", "Name", "Url" },
