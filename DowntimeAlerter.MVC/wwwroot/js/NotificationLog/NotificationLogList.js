@@ -1,10 +1,13 @@
 ﻿//# sourceURL=NotificationLogList.js
 var NotificationLogList = {
     Init: function () {
+        Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
         NotificationLogList.LoadFormData();
     },
     LoadFormData: function () {
-        Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
+        setInterval(function () {
+            Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
+        }, 20000);
     }
 }
 var columns = [{

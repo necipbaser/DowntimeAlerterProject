@@ -1,8 +1,6 @@
 ﻿
-@{
-    ViewBag.Title = "Login";
-    Layout = null;
-}
+@{ ViewBag.Title = "Login";
+                Layout = null; }
 <!DOCTYPE html>
 
 <html lang="en">
@@ -53,13 +51,14 @@
     <link href="~/ThemeAssets/plugins/general/plugins/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
     <link href="~/ThemeAssets/plugins/general/plugins/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
     <link href="~/ThemeAssets/plugins/general/plugins/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
+    <link href="~/ThemeAssets/plugins/general/@('@')fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 
     <!--end:: Vendor Plugins -->
     <link href="~/ThemeAssets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
     <!--begin:: Vendor Plugins for custom pages -->
     <link href="~/ThemeAssets/plugins/custom/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-     <link href="~/ThemeAssets/plugins/custom/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="~/ThemeAssets/plugins/custom/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
     <link href="~/ThemeAssets/plugins/custom/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="~/ThemeAssets/plugins/custom/datatables.net-autofill-bs4/css/autoFill.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="~/ThemeAssets/plugins/custom/datatables.net-colreorder-bs4/css/colReorder.bootstrap4.min.css" rel="stylesheet" type="text/css" />
@@ -124,6 +123,11 @@
                                 <div class="kt-login__actions">
                                     <button onclick="Login.Login()" class="btn btn-brand btn-pill kt-login__btn-primary">Sign In</button>
                                 </div>
+                                <div class="kt-login__actions">
+                                    <a href="~/ThemeAssets/media/DowntimeAlerter_Guide.pdf" target="_blank" class="btn btn-danger">
+                                        <i class="fa fa-file-pdf"></i>For Guide
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,8 +138,7 @@
 
     <!-- end:: Page -->
     <!-- begin::Global Config(global config for global JS sciprts) -->
-    <script>
-        var KTAppOptions = {
+    <script>var KTAppOptions = {
             "colors": {
                 "state": {
                     "brand": "#5d78ff",
@@ -162,8 +165,7 @@
                     ]
                 }
             }
-        };
-    </script>
+        };</script>
 
     <!-- end::Global Config -->
     <!--begin::Global Theme Bundle(used by all pages) -->
@@ -289,8 +291,7 @@
 <!-- end::Body -->
 </html>
 
-<script>
-    jQuery(document).ready(function () {
+<script>jQuery(document).ready(function () {
         eval("Login.Init();");
 
         $("#username,#password").on('keyup', function (e) {
@@ -298,5 +299,4 @@
                 Login.Login();
             }
         });
-    });    
-</script>
+    });</script>
