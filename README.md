@@ -56,32 +56,32 @@ Serilog Settings: DowntimeAlerter.MVC -> appsettings.json
 
 Here are Serilog settings;
 
-  "Serilog": 
-  
-  {  
-  
-    "MinimumLevel": "Information",
-    
-    "WriteTo": [
-    
-      {
-      
-        "Name": "MSSqlServer",
-        
-        "Args": {
-        
-          "connectionString": "Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true",
-          
-          "tableName": "Logs",
-          
-          "autoCreateSqlTable": true
-          
-        }
-        
+      "Serilog": 
+
+      {  
+
+        "MinimumLevel": "Information",
+
+        "WriteTo": [
+
+          {
+
+            "Name": "MSSqlServer",
+
+            "Args": {
+
+              "connectionString": "Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true",
+
+              "tableName": "Logs",
+
+              "autoCreateSqlTable": true
+
+            }
+
+          }
+
+        ]
+
       }
-      
-    ]
-    
-  }
   
 Necip Başer
