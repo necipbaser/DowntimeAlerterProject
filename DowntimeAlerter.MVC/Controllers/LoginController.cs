@@ -18,8 +18,8 @@ namespace DowntimeAlerter.MVC.Controllers
 
         public LoginController(ILogger<LoginController> logger,IUserService userService, IMapper mapper)
         {
-            this._mapper = mapper;
-            this._userService = userService;
+            _mapper = mapper;
+            _userService = userService;
             _logger = logger;
         }
 
@@ -43,7 +43,7 @@ namespace DowntimeAlerter.MVC.Controllers
                     CookieOptions option = new CookieOptions();
                     option.Expires = DateTime.Now.AddMinutes(60);
                     Response.Cookies.Append("id", returnUser.Id.ToString(), option);
-                    return Json(new { success = true, msg = "" });
+                    return Json(new { success = true, msg = string.Empty });
                 }
                 else
                     return Json(new { success = false,msg="Username or password is incorrect!" });

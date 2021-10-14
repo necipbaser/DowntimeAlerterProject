@@ -64,13 +64,19 @@ namespace DowntimeAlerter.MVC.Controllers
         {
             if (id == 0)
                 return BadRequest();
+            
             var site = await _siteService.GetSiteById(id);
+            
+            if (site == null)
+            {
+                return NotFound();
+            }
+
             var siteEmails = await _siteEmailService.GetSiteEmailsBySiteId(id);
             var siteDTO = _mapper.Map<Site, SiteDTO>(site);
             var siteEmailDTO = _mapper.Map<IEnumerable<SiteEmail>, IEnumerable<SiteEmailDTO>>(siteEmails);
             siteDTO.SiteEmails = siteEmailDTO;
-            if (site == null)
-                return NotFound();
+           
             return View(siteDTO);
         }
 

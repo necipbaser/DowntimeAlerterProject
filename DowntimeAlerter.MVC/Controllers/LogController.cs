@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
+using DowntimeAlerter.MVC.ActionFilters;
 using DowntimeAlerter.MVC.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
+    [ServiceFilter(typeof(LoginFilterAttribute))]
     public class LogController : Controller
     {
         private readonly ILogger<LogController> _logger;

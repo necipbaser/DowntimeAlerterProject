@@ -7,7 +7,10 @@ using DowntimeAlerter.Core;
 using DowntimeAlerter.Core.Services;
 using DowntimeAlerter.Data;
 using DowntimeAlerter.MVC.ActionFilters;
+using DowntimeAlerter.MVC.Notification;
+using DowntimeAlerter.MVC.Notification.Settings;
 using DowntimeAlerter.Services;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +51,15 @@ namespace DowntimeAlerter.MVC
             services.AddSingleton<IHttpContextAccessor,
                 HttpContextAccessor>();
 
+            services.AddHangfire(x =>x.UseSqlServerStorage("Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
+            //services.AddSingleton<IWorker, Worker>();
+
+            //services.AddScoped<IEmailSender, EmailSender>();
+            //services.AddHostedService<CheckSite>();
+            //services.AddScoped<IEmailSender, EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +81,9 @@ namespace DowntimeAlerter.MVC
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
 
             app.UseEndpoints(endpoints =>
             {

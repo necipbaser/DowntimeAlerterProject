@@ -36,8 +36,8 @@ var EditSite = {
             return Util.Notification.Swall("warning", "Site name cannot be empty!", "Error", "Ok", false);
         if (siteUrl == "")
             return Util.Notification.Swall("warning", "Site Url cannot be empty!", "Error", "Ok", false);
-        if (siteIntervalTime < 1000)
-            return Util.Notification.Swall("warning", "The Interval Time must be greater than 1000 seconds!", "Error", "Ok", false);
+        if (siteIntervalTime < 60)
+            return Util.Notification.Swall("warning", "The Interval Time must be greater than 60 seconds!", "Error", "Ok", false);
         if (siteId=="")
             return Util.Notification.Swall("warning", "Please select a site!", "Error", "Ok", false);
 
