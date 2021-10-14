@@ -37,6 +37,7 @@ Here are mail settings;
 
 
   "MailSettings":  
+  
   {
   "Mail": "necipbasertest@gmail.com",    
     "DisplayName": "Downtime Alerter",
