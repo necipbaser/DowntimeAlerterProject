@@ -38,7 +38,6 @@ For Add New Site: localhost:yourport/Site
 
 For Notification Log List: localhost:yourport/NotificationLog
 
-
 For Error/Information Log List: localhost:yourport/Log
 
 
