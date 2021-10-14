@@ -74,6 +74,7 @@ var EditSite = {
         Util.BlockUI.UnBlock();
         if (response.success == true) {
             EditSite.GetSiteEmailList();
+            Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             return Util.Notification.Swall("success", response.msg, "Success", "Ok", false);
         } else {
             return Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);

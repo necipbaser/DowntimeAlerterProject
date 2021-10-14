@@ -25,21 +25,23 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly ILogger<TaskController> _logger;
         private readonly ISiteService _siteService;
         private readonly ISiteEmailService _siteEmailService;
+        private readonly INotificationLogService _notificaitionLogService;
         private readonly IMapper _mapper;
         private readonly HttpClient _httpClient;
         private readonly MailSettings _mailSettings;
 
-        public TaskController(ILogger<TaskController> logger, ISiteService siteService, IMapper mapper, IOptions<MailSettings> mailSettings, ISiteEmailService siteEmailService)
+        public TaskController(ILogger<TaskController> logger, ISiteService siteService, IMapper mapper, IOptions<MailSettings> mailSettings, ISiteEmailService siteEmailService,INotificationLogService notificaitionLogService)
         {
             _siteService = siteService;
             _siteEmailService = siteEmailService;
+            _notificaitionLogService = notificaitionLogService;
             _logger = logger;
             _mapper = mapper;
             _httpClient = new HttpClient();
             _mailSettings = mailSettings.Value;
         }
 
-        public void StartNotificationJob()
+        public void StartRecurringNotificationJob()
         {
             RemoveJob();
             var sites = _siteService.GetAllSites();
@@ -56,7 +58,6 @@ namespace DowntimeAlerter.MVC.Controllers
 
         public void SendMail(IEnumerable<SiteDTO> siteResources)
         {
-            _logger.LogError("before");
             //get all sites
             try
             {
@@ -76,20 +77,32 @@ namespace DowntimeAlerter.MVC.Controllers
                                 MailRequest request = new MailRequest();
                                 request.ToEmail = userEmail;
                                 request.Subject = "Downtime Alerter";
-                                if (responseMsg.StatusCode != HttpStatusCode.OK)
+                                var notificaitionLog = new NotificationLog();
+                                if ((int)responseMsg.StatusCode >=200 && (int)responseMsg.StatusCode<=299)
                                 {
-                                    request.Body = item.Url + " is down.";
+                                    string message = item.Url + " is UP.";
+                                    notificaitionLog.Message = message;
+                                    notificaitionLog.SiteName = item.Name;
+                                    notificaitionLog.State = "Up";
+                                    SaveNotificatonLog(notificaitionLog);
+                                    request.Body = message;
                                 }
                                 else
                                 {
-                                    request.Body = item.Url + " is up.";
+                                    string message = item.Url + " is DOWN.";
+                                    notificaitionLog.Message = message;
+                                    notificaitionLog.SiteName = item.Name;
+                                    notificaitionLog.State = "Down";
+                                    SaveNotificatonLog(notificaitionLog);
+                                    request.Body = message;
                                 }
                                 SendEmail(request);
                             }
                         }
                         catch (Exception ex)
                         {
-                            _logger.LogError("An error occured for " + item.Name + " while checking health of it.");
+                            _logger.LogError("An error occured for " + item.Name + " while checking health of it. System Message:" 
+                                ex.Message);
                         }
                         item.CheckedDate = DateTime.Now;
                     }
@@ -126,6 +139,19 @@ namespace DowntimeAlerter.MVC.Controllers
                 {
                     RecurringJob.RemoveIfExists(recurringJob.Id);
                 }
+            }
+        }
+
+        public void SaveNotificatonLog(NotificationLog notificationLog)
+        {
+            try
+            {
+                notificationLog.CheckedDate = DateTime.Now;
+                _notificaitionLogService.CreateNotificationLog(notificationLog);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
             }
         }
     }

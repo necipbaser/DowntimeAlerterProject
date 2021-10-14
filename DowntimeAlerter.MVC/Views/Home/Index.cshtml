@@ -5,3 +5,9 @@
 <div class="text-center">
     <h1 class="display-4">Downtime Alerter</h1>
 </div>
+
+<script>
+    $(document).ready(function () {
+        Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
+    })
+</script>

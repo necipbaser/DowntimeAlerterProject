@@ -13,6 +13,7 @@ namespace DowntimeAlerter.Data
         public DbSet<Site> Sites { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<NotificationLog> NotificationLogs { get; set; }
 
         public DowntimeAlerterDbContext(DbContextOptions<DowntimeAlerterDbContext> options)
             : base(options)
@@ -30,6 +31,9 @@ namespace DowntimeAlerter.Data
 
             builder
                 .ApplyConfiguration(new UserConfiguration());
+
+            builder
+                .ApplyConfiguration(new NotificationConfiguration());
 
             builder.Entity<User>().HasData(
                 new User { Id = 1, Name = "Necip Baser", UserName = "user", Password = "1234" }

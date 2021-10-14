@@ -43,6 +43,7 @@ namespace DowntimeAlerter.MVC
             services.AddTransient<ISiteService, SiteService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ILogService, LogService>();
+            services.AddTransient<INotificationLogService, NotificationLogService>();
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

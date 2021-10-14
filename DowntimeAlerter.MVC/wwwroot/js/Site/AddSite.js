@@ -5,14 +5,13 @@ var AddSite = {
         AddSite.LoadFormData();
     },
     LoadFormData: function () {
-
     },
     Save: function () {
         //parameters
         var siteName = $("#txtSiteName").val();
         var siteUrl = $("#txtSiteUrl").val();
         var siteIntervalTime = $("#txtIntervalTime").val();
-
+        var selectSsl = $("#selectSsl").val();
         //validations
         if (siteName == "")
             return Util.Notification.Swall("warning", "Site name cannot be empty!", "Error", "Ok", false);
@@ -24,9 +23,10 @@ var AddSite = {
         if (addedEmailList.length < 1)
             return Util.Notification.Swall("warning", "Please enter at least 1 e-mail address.", "Error", "Ok", false);
 
+        var totalUrl = selectSsl + siteUrl;
         var formData = new FormData();
         formData.append("Name", siteName);
-        formData.append("Url", siteUrl);
+        formData.append("Url", totalUrl);
         formData.append("IntervalTime", siteIntervalTime);
         for (var i = 0; i < addedEmailList.length; i++) {
             formData.append("SiteEmails[" + i + "].Email", addedEmailList[i]);
@@ -37,8 +37,7 @@ var AddSite = {
     CallbackSave: function (response) {
         Util.BlockUI.UnBlock();
         if (response.data == true) {
-            //remove and restart job
-            Util.Ajax.Generic("Task", "StartNotificationJob", "", null, true, "GET");
+            Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             SiteList.LoadFormData();
             $("#responsive-modal").modal("toggle");
             return Util.Notification.Swall("success", response.msg, "Success", "Ok", false);
@@ -66,7 +65,7 @@ var AddSite = {
     },
     GetAddedEmailList: function () {
         var html = '';
-        if (addedEmailList.length<1)
+        if (addedEmailList.length < 1)
             $("#tblAddedEmail").html(html);
         else {
             for (var i = 0; i < addedEmailList.length; i++) {
