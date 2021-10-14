@@ -36,8 +36,9 @@ For Mail Settings: DowntimeAlerter.MVC -> appsettings.json
 Here are mail settings;
 
 
-  "MailSettings": {  
+  "MailSettings":
   
+  {    
     "Mail": "necipbasertest@gmail.com",
     
     "DisplayName": "Downtime Alerter",
