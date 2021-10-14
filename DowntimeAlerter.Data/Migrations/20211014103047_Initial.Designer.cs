@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DowntimeAlerter.Data.Migrations
 {
     [DbContext(typeof(DowntimeAlerterDbContext))]
-    [Migration("20211014090245_Initial")]
+    [Migration("20211014103047_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,8 +141,8 @@ namespace DowntimeAlerter.Data.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -158,7 +158,7 @@ namespace DowntimeAlerter.Data.Migrations
                         {
                             Id = 1,
                             Name = "Necip Baser",
-                            Password = "1234",
+                            Password = "$MYHASH$V1$10000$ypt07yU/6uDB1DKWhssk74PQnL5jDfMy56t61pU1ZTXK5Tv1",
                             UserName = "user"
                         });
                 });

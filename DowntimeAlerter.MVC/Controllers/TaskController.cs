@@ -71,37 +71,17 @@ namespace DowntimeAlerter.MVC.Controllers
                         try
                         {
                             var userEmails = item.SiteEmails.Select(s => s.Email).ToList();
-                            foreach (var userEmail in userEmails)
-                            {
-                                var responseMsg = _httpClient.GetAsync(item.Url).GetAwaiter().GetResult();
-                                MailRequest request = new MailRequest();
-                                request.ToEmail = userEmail;
-                                request.Subject = "Downtime Alerter";
-                                var notificaitionLog = new NotificationLog();
-                                if ((int)responseMsg.StatusCode >=200 && (int)responseMsg.StatusCode<=299)
-                                {
-                                    string message = item.Url + " is UP.";
-                                    notificaitionLog.Message = message;
-                                    notificaitionLog.SiteName = item.Name;
-                                    notificaitionLog.State = "Up";
-                                    SaveNotificatonLog(notificaitionLog);
-                                    request.Body = message;
-                                }
-                                else
-                                {
-                                    string message = item.Url + " is DOWN.";
-                                    notificaitionLog.Message = message;
-                                    notificaitionLog.SiteName = item.Name;
-                                    notificaitionLog.State = "Down";
-                                    SaveNotificatonLog(notificaitionLog);
-                                    request.Body = message;
-                                }
-                                SendEmail(request);
-                            }
+                            SendEmailToSiteUsers(userEmails,item);
                         }
                         catch (Exception ex)
                         {
-                            _logger.LogError("An error occured for " + item.Name + " while checking health of it. System Message:" 
+                            var notificaitionLog = new NotificationLog();
+                            string message = item.Url + " Name Not Resolved.";
+                            notificaitionLog.Message = message;
+                            notificaitionLog.SiteName = item.Name;
+                            notificaitionLog.State = "Name Not Resolved";
+                            SaveNotificatonLog(notificaitionLog);
+                            _logger.LogError("An error occured for " + item.Name + " while checking health of it. System Message:" +
                                 ex.Message);
                         }
                         item.CheckedDate = DateTime.Now;
@@ -114,21 +94,59 @@ namespace DowntimeAlerter.MVC.Controllers
             }
         }
 
+        public void SendEmailToSiteUsers(List<string> userEmails, SiteDTO site)
+        {
+            foreach (var userEmail in userEmails)
+            {
+                var responseMsg = _httpClient.GetAsync(site.Url).GetAwaiter().GetResult();
+                MailRequest request = new MailRequest();
+                request.ToEmail = userEmail;
+                request.Subject = "Downtime Alerter";
+                var notificaitionLog = new NotificationLog();
+                if ((int)responseMsg.StatusCode >= 200 && (int)responseMsg.StatusCode <= 299)
+                {
+                    string message = site.Url + " is UP.";
+                    notificaitionLog.Message = message;
+                    notificaitionLog.SiteName = site.Name;
+                    notificaitionLog.State = "Up";
+                    SaveNotificatonLog(notificaitionLog);
+                    request.Body = message;
+                }
+                else
+                {
+                    string message = site.Url + " is DOWN.";
+                    notificaitionLog.Message = message;
+                    notificaitionLog.SiteName = site.Name;
+                    notificaitionLog.State = "Down";
+                    SaveNotificatonLog(notificaitionLog);
+                    request.Body = message;
+                }
+                SendEmail(request);
+            }
+        }
+
         public void SendEmail(MailRequest mailRequest)
         {
-            var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-            email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
-            email.Subject = mailRequest.Subject;
-            var builder = new BodyBuilder();
+            try
+            {
+                var email = new MimeMessage();
+                email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
+                email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
+                email.Subject = mailRequest.Subject;
+                var builder = new BodyBuilder();
 
-            builder.HtmlBody = mailRequest.Body;
-            email.Body = builder.ToMessageBody();
-            using var smtp = new SmtpClient();
-            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
-            smtp.Send(email);
-            smtp.Disconnect(true);
+                builder.HtmlBody = mailRequest.Body;
+                email.Body = builder.ToMessageBody();
+                using var smtp = new SmtpClient();
+                smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+                smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                smtp.Send(email);
+                smtp.Disconnect(true);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
         }
 
         public void RemoveJob()

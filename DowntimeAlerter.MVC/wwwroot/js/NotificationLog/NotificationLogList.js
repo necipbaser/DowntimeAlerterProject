@@ -22,9 +22,11 @@ var columns = [{
     render: function (data, type, full, meta) {
         var returnValue = full.state;
         if (full.state == "Up")
-            returnValue = '<span><span style="width: 100px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-success">' + full.state + '</span></span>';
+            returnValue = '<span><span style="width: 150px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-success">' + full.state + '</span></span>';
         if (full.state == "Down")
-            returnValue = '<span><span style="width: 100px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">' + full.state + '</span></span>';
+            returnValue = '<span><span style="width: 150px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">' + full.state + '</span></span>';
+        if (full.state == "Name Not Resolved")
+            returnValue = '<span><span style="width: 150px;" class="btn btn-bold btn-sm btn-font-sm  btn-label-warning">' + full.state + '</span></span>';
         return returnValue;
     }
 },

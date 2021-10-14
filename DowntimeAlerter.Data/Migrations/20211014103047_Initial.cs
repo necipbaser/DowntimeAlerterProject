@@ -46,7 +46,7 @@ namespace DowntimeAlerter.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -76,7 +76,7 @@ namespace DowntimeAlerter.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "Password", "UserName" },
-                values: new object[] { 1, "Necip Baser", "1234", "user" });
+                values: new object[] { 1, "Necip Baser", "$MYHASH$V1$10000$ypt07yU/6uDB1DKWhssk74PQnL5jDfMy56t61pU1ZTXK5Tv1", "user" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SiteEmails_SiteId",

@@ -7,6 +7,8 @@ using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.MVC.DTO;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using DowntimeAlerter.Core.Utilities;
+using DowntimeAlerter.MVC.Models;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
@@ -16,7 +18,7 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public LoginController(ILogger<LoginController> logger,IUserService userService, IMapper mapper)
+        public LoginController(ILogger<LoginController> logger, IUserService userService, IMapper mapper)
         {
             _mapper = mapper;
             _userService = userService;
@@ -31,34 +33,43 @@ namespace DowntimeAlerter.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Login(UserDTO model)
         {
-            if (model.Username == "" || model.Password=="")
-                return Json(new { success = true, msg = "Please enter username and password.!" });
-            var user = _mapper.Map<UserDTO, User>(model);
-            try
+            if (ModelState.IsValid)
             {
-                var returnUser = await _userService.GetUserAsync(user);
-                if (returnUser != null)
+                if (model.Username == string.Empty || model.Password == string.Empty)
+                    return Json(new { success = true, msg = "Please enter username and password.!" });
+                var user = _mapper.Map<UserDTO, User>(model);
+                try
                 {
-                    //add cookie and return
-                    CookieOptions option = new CookieOptions();
-                    option.Expires = DateTime.Now.AddMinutes(60);
-                    Response.Cookies.Append("id", returnUser.Id.ToString(), option);
-                    return Json(new { success = true, msg = string.Empty });
+                    var returnUser = await _userService.GetUserAsync(user);
+                    string hashedPassword = SecurePasswordHasher.Hash(model.Password);
+                    bool passwordIsCorrect = SecurePasswordHasher.Verify(model.Password,hashedPassword);
+                    if (returnUser != null && passwordIsCorrect)
+                    {
+                        //add cookie and return
+                        CookieOptions option = new CookieOptions();
+                        option.Expires = DateTime.Now.AddMinutes(60);
+                        Response.Cookies.Append(ProjectConstants.CookieName, returnUser.Id.ToString(), option);
+                        return Json(new { success = true, msg = string.Empty });
+                    }
+                    else
+                    {
+                        return Json(new { success = false, msg = "Username or password is incorrect!" });
+                    }
                 }
-                else
-                    return Json(new { success = false,msg="Username or password is incorrect!" });
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.Message);
+                    return Json(new { success = false, msg = "An error was occured" });
+                }
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                return Json(new { success = true, msg = ex.Message });
-            }
+            else
+                return Json(new { success = true, msg = "model is not valid." });
         }
 
         [HttpGet]
         public IActionResult Logout()
         {
-            Response.Cookies.Delete("id");
+            Response.Cookies.Delete(ProjectConstants.CookieName);
             return RedirectToAction("Login");
         }
     }

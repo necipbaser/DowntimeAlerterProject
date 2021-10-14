@@ -16,7 +16,7 @@ namespace DowntimeAlerter.Data.Repositories
         public async Task<User> GetUserAsync(User user)
         {
             return await DowntimeAlerterDbContext.Users
-                .Where(w => w.UserName == user.UserName && w.Password == user.Password).FirstOrDefaultAsync();
+                .Where(w => w.UserName == user.UserName).FirstOrDefaultAsync();
         }
 
         private DowntimeAlerterDbContext DowntimeAlerterDbContext

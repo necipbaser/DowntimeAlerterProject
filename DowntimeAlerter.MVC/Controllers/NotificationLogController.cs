@@ -34,9 +34,18 @@ namespace DowntimeAlerter.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<LogDTO>>> GetAllLogs()
         {
-            var logs = await _notificaitonLogService.GetLogs();
-            var logsDto = _mapper.Map<IEnumerable<NotificationLog>, IEnumerable<NotificationLogDTO>>(logs);
-            return Json(new { data = logsDto });
+            try
+            {
+                var logs = await _notificaitonLogService.GetLogs();
+                var logsDto = _mapper.Map<IEnumerable<NotificationLog>, IEnumerable<NotificationLogDTO>>(logs).OrderByDescending(o => o.CheckedDate);
+                return Json(new { data = logsDto });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return Json(new { data = false });
+            }
+
         }
     }
 }

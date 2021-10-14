@@ -4,6 +4,7 @@ using DowntimeAlerter.Data.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DowntimeAlerter.Core.Utilities;
 
 namespace DowntimeAlerter.Data
 {
@@ -34,9 +35,10 @@ namespace DowntimeAlerter.Data
 
             builder
                 .ApplyConfiguration(new NotificationConfiguration());
+            string hashedPasword = SecurePasswordHasher.Hash("1234");
 
             builder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Necip Baser", UserName = "user", Password = "1234" }
+                new User { Id = 1, Name = "Necip Baser", UserName = "user", Password = hashedPasword }
             );
         }
     }

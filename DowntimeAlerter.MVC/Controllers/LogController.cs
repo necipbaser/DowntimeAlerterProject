@@ -34,17 +34,34 @@ namespace DowntimeAlerter.MVC.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<LogDTO>>> GetAllLogs()
         {
-            var logs = await _logService.GetLogs();
-            var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs);
-            return Json(new { data = logsDto });
+            try
+            {
+                var logs = await _logService.GetLogs();
+                var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs).OrderByDescending(o => o.TimeStamp);
+                return Json(new { data = logsDto });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return Json(new { data = false });
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> LogDetails(int id)
         {
-            var log = await _logService.GetLog(id);
-            var logDTO = _mapper.Map<Log, LogDTO>(log);
-            return View(logDTO);
+            try
+            {
+                var log = await _logService.GetLog(id);
+                var logDTO = _mapper.Map<Log, LogDTO>(log);
+                return View(logDTO);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return null;
+            }
         }
     }
 }

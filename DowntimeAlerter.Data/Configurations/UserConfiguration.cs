@@ -28,7 +28,7 @@ namespace DowntimeAlerter.Data.Configurations
             builder
                 .Property(m => m.Password)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(300);
 
             builder
                 .ToTable("Users");

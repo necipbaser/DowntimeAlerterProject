@@ -83,9 +83,6 @@ namespace DowntimeAlerter.MVC
 
             app.UseAuthorization();
 
-            app.UseHangfireDashboard();
-            app.UseHangfireServer();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -98,7 +95,8 @@ namespace DowntimeAlerter.MVC
                 var context = serviceScope.ServiceProvider.GetRequiredService<DowntimeAlerterDbContext>();
                 context.Database.Migrate();
                 context.Database.EnsureCreated();
-
+                app.UseHangfireDashboard();
+                app.UseHangfireServer();
             }
         }
     }
