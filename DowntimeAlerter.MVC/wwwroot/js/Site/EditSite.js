@@ -30,6 +30,7 @@ var EditSite = {
         var siteUrl = $("#txtEditSiteUrl").val();
         var siteIntervalTime = $("#txtEditIntervalTime").val();
         var siteId = $("#selectedSiteId").text();
+        var selectSsl = $("#selectEditSsl").val();
 
         //validations
         if (siteName == "")
@@ -40,6 +41,11 @@ var EditSite = {
             return Util.Notification.Swall("warning", "The Interval Time must be greater than 60 seconds!", "Error", "Ok", false);
         if (siteId=="")
             return Util.Notification.Swall("warning", "Please select a site!", "Error", "Ok", false);
+
+        var totalUrl = selectSsl + siteUrl;
+        var urlIsCorrect = Util.UrlChecker.UrlChecker(totalUrl);
+        if (!urlIsCorrect)
+            return Util.Notification.Swall("warning", "Please write correct URL format.", "Error", "Ok", false);
 
         var formData = new FormData();
         formData.append("Name", siteName);

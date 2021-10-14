@@ -26,7 +26,7 @@
     </div>
     <div class="modal-body" style="background-color: #f1f0f0">
         <div class="row" style="color:black!important">
-            <div class="col-6">
+            <div class="col-md-6 col-xs-12">
                 <div class="kt-portlet" style=" height: 400px;">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
@@ -51,9 +51,12 @@
                                     <div class="col-9">
                                         <div class="form-group">
                                             <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
-                                            <input class="form-control" type="text" value="" placeholder="Url..." id="txtSiteUrl">
+                                            <input class="form-control" type="text" value="" placeholder="Url..." id="txtSiteUrl" onkeyup="AddSite.UrlCheck()">
                                         </div>
                                     </div>
+                                    @*<div class="col-1" style="margin-top: 43px;">
+                                        <i style=" color: red; font-size: 18px;" id="urlCheckIcon" class="flaticon2-cross"></i>
+                                    </div>*@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="example-text-input" class="col-form-label">Interval Time (second)<span style="color:red">*</span></label>
@@ -66,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6 col-xs-12">
                 <div class="kt-portlet" style=" height: 400px;">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->

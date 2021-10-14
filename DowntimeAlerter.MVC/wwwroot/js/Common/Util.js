@@ -2134,3 +2134,18 @@ Util.EmailValidate = {
         return re.test(String(email).toLowerCase());
     }
 }
+
+Util.UrlChecker = {
+    UrlChecker: function (url) {
+        var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+        var regex = new RegExp(expression);
+        if (url.match(regex)) {
+            if (url.indexOf("www") >= 0 && url.indexOf(".") >= 1)
+                return true;
+            else
+                return false
+        } else {
+            return false;
+        }
+    }
+}

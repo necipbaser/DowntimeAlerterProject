@@ -41,7 +41,16 @@
                                             <input class="form-control " type="text" value="@Model.Name" placeholder="Site name..." id="txtEditSiteName">
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <select class="form-control" id="selectEditSsl">
+                                                <option value="http://">http</option>
+                                                <option value="https://">https</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
                                         <div class="form-group">
                                             <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
                                             <input class="form-control" type="text" value="@Model.Url" placeholder="Url..." id="txtEditSiteUrl">

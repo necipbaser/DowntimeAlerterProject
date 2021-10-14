@@ -24,6 +24,10 @@ var AddSite = {
             return Util.Notification.Swall("warning", "Please enter at least 1 e-mail address.", "Error", "Ok", false);
 
         var totalUrl = selectSsl + siteUrl;
+        var urlIsCorrect = Util.UrlChecker.UrlChecker(totalUrl);
+        if (!urlIsCorrect)
+            return Util.Notification.Swall("warning", "Please write correct URL format.", "Error", "Ok", false);
+
         var formData = new FormData();
         formData.append("Name", siteName);
         formData.append("Url", totalUrl);
@@ -80,5 +84,24 @@ var AddSite = {
             }
             $("#tblAddedEmail").html(html);
         }
+    },
+    UrlCheck: function () {
+        var url = $("#txtSiteUrl").val();
+        $("#txtSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
+
+        var siteUrl = $("#txtSiteUrl").val();
+        var selectSsl = $("#selectSsl").val();
+        var totalUrl = selectSsl + siteUrl;
+
+        if (Util.UrlChecker.UrlChecker(totalUrl)) {
+            $("#urlCheckIcon").removeClass("flaticon2-cross").addClass("flaticon2-check-mark");
+            $("#urlCheckIcon").css("color", "green");
+        } else {
+            $("#urlCheckIcon").removeClass("flaticon2-check-mark").addClass("flaticon2-cross");
+            $("#urlCheckIcon").css("color", "red");
+        }
+    },
+    UrlChecker: function (url) {
+        
     }
 }
