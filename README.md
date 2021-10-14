@@ -4,51 +4,39 @@ In this project used;
 
 
 -Asp.Net Core MVC
--Entity Framework
 
+-Entity Framework
 
 -Bootstrap
 
-
 -Jquery
-
 
 -Hangfire
 
-
 -AutoMapper
-
 
 -Serilog
 
-
 For Login;
-
 
 UserName: user
 
-
 Password: 4*!Vf2
 
-
 For Add New Site: localhost:yourport/Site
-
 
 For Notification Log List: localhost:yourport/NotificationLog
 
 For Error/Information Log List: localhost:yourport/Log
 
-
 For Hangfire Dashboard: localhost:yourport/hangfire
 
 For Mail Settings: DowntimeAlerter.MVC -> appsettings.json
 
-
 Here are mail settings;
 
 
-  "MailSettings": {
-  
+  "MailSettings": {  
   
     "Mail": "necipbasertest@gmail.com",
     
@@ -60,9 +48,10 @@ Here are mail settings;
   
 Serilog Settings: DowntimeAlerter.MVC -> appsettings.json
 
-
 Here are Serilog settings;
+
   "Serilog": {
+  
     "MinimumLevel": "Information",
     "WriteTo": [
       {
