@@ -45,5 +45,4 @@ Here are Serilog settings;
     ]
   }
   
-  
 Necip Başer
