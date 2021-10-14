@@ -36,20 +36,21 @@ For Mail Settings: DowntimeAlerter.MVC -> appsettings.json
 Here are mail settings;
 
 
-  "MailSettings":
-  
-  {"Mail": "necipbasertest@gmail.com",    
+  "MailSettings":  
+  {
+  "Mail": "necipbasertest@gmail.com",    
     "DisplayName": "Downtime Alerter",
     "Password": "password",
     "Host": "smtp.gmail.com",
-    "Port": 587}
+    "Port": 587
+    }
   
 Serilog Settings: DowntimeAlerter.MVC -> appsettings.json
 
 Here are Serilog settings;
 
-  "Serilog": {
-  
+  "Serilog": 
+  {  
     "MinimumLevel": "Information",
     "WriteTo": [
       {
