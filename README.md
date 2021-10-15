@@ -38,6 +38,9 @@ App screenshots;
 ![alt text](https://user-images.githubusercontent.com/22480128/137471396-2f64c980-5c99-4f1e-82b1-780a0ac3877e.png)
 ![alt text](https://user-images.githubusercontent.com/22480128/137471376-4ae66637-736a-45bc-be95-187d9518d1af.png)
 
+**`Sended Mails`**
+
+![alt text](https://user-images.githubusercontent.com/22480128/137471640-d9f85aec-595a-4883-97a6-d96a218b4d07.png)
 
 **`Notification Logs Screen`**
 
