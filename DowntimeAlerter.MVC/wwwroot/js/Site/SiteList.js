@@ -43,6 +43,10 @@ var columns = [{
     data: 'name',
     title: 'Name',
     width: '15%',
+    render: function (data, type, full, meta) {
+        var returnValue = '<b>' + full.name + '</b>';
+        return returnValue;
+    }
 },
 {
     data: 'url',
