@@ -1,4 +1,4 @@
-# DowntimeAlerterProject
+# DowntimeAlerter Project
 Dowtime Alerter project detects whether sites are Up or Down and sends notifications.
 In this project used;
 
