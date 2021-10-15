@@ -1,17 +1,17 @@
 // Class definition
 
-var KTBootstrapSelect = function () {
-    
+var KTBootstrapSelect = function() {
+
     // Private functions
-    var demos = function () {
+    var demos = function() {
         // minimum setup
-        $('.kt-selectpicker').selectpicker();
-    }
+        $(".kt-selectpicker").selectpicker();
+    };
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

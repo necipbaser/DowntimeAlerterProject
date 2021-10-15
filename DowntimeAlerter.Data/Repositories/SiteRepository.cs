@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DowntimeAlerter.Data.Repositories
 {
@@ -10,7 +10,10 @@ namespace DowntimeAlerter.Data.Repositories
     {
         public SiteRepository(DowntimeAlerterDbContext context)
             : base(context)
-        { }
+        {
+        }
+
+        private DowntimeAlerterDbContext DowntimeAlerterDbContext => Context as DowntimeAlerterDbContext;
 
         public async Task<IEnumerable<Site>> GetAllWithSiteEmailsAsync()
         {
@@ -22,13 +25,8 @@ namespace DowntimeAlerter.Data.Repositories
         public async Task<Site> GetWithSiteEmailsByIdAsync(int id)
         {
             return await DowntimeAlerterDbContext.Sites
-              .Include(a => a.SiteEmails)
-              .SingleOrDefaultAsync(a => a.Id == id);
-        }
-
-        private DowntimeAlerterDbContext DowntimeAlerterDbContext
-        {
-            get { return Context as DowntimeAlerterDbContext; }
+                .Include(a => a.SiteEmails)
+                .SingleOrDefaultAsync(a => a.Id == id);
         }
     }
 }

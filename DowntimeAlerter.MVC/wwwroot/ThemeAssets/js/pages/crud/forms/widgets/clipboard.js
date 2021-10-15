@@ -1,25 +1,26 @@
 "use strict";
 // Class definition
 
-var KTClipboardDemo = function () {
-    
+var KTClipboardDemo = function() {
+
     // Private functions
-    var demos = function () {
+    var demos = function() {
         // basic example
-        new ClipboardJS('[data-clipboard=true]').on('success', function(e) {
-            e.clearSelection();
-            alert('Copied!');
-        });
-    }
+        new ClipboardJS("[data-clipboard=true]").on("success",
+            function(e) {
+                e.clearSelection();
+                alert("Copied!");
+            });
+    };
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();
 
-jQuery(document).ready(function() {    
+jQuery(document).ready(function() {
     KTClipboardDemo.init();
 });

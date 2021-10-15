@@ -15,7 +15,7 @@ namespace DowntimeAlerter.Test
             var mapper = config.CreateMapper();
 
             //arrange act
-            User user = new User();
+            var user = new User();
             user.UserName = "user";
             user.Password = "1234";
 

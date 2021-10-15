@@ -11,13 +11,13 @@ var KTToastrDemo = function() {
         var toastCount = 0;
         var $toastlast;
 
-        var getMessage = function () {
+        var getMessage = function() {
             var msgs = [
-                'New order has been placed!',
-                'Are you the six fingered man?',
-                'Inconceivable!',
-                'I do not think that means what you think it means.',
-                'Have fun storming the castle!'
+                "New order has been placed!",
+                "Are you the six fingered man?",
+                "Inconceivable!",
+                "I do not think that means what you think it means.",
+                "Have fun storming the castle!"
             ];
             i++;
             if (i === msgs.length) {
@@ -27,40 +27,41 @@ var KTToastrDemo = function() {
             return msgs[i];
         };
 
-        var getMessageWithClearButton = function (msg) {
-            msg = msg ? msg : 'Clear itself?';
-            msg += '<br /><br /><button type="button" class="btn btn-outline-light btn-sm--air--wide clear">Yes</button>';
+        var getMessageWithClearButton = function(msg) {
+            msg = msg ? msg : "Clear itself?";
+            msg +=
+                '<br /><br /><button type="button" class="btn btn-outline-light btn-sm--air--wide clear">Yes</button>';
             return msg;
         };
 
-        $('#showtoast').click(function () {
+        $("#showtoast").click(function() {
             var shortCutFunction = $("#toastTypeGroup input:radio:checked").val();
-            var msg = $('#message').val();
-            var title = $('#title').val() || '';
-            var $showDuration = $('#showDuration');
-            var $hideDuration = $('#hideDuration');
-            var $timeOut = $('#timeOut');
-            var $extendedTimeOut = $('#extendedTimeOut');
-            var $showEasing = $('#showEasing');
-            var $hideEasing = $('#hideEasing');
-            var $showMethod = $('#showMethod');
-            var $hideMethod = $('#hideMethod');
+            var msg = $("#message").val();
+            var title = $("#title").val() || "";
+            var $showDuration = $("#showDuration");
+            var $hideDuration = $("#hideDuration");
+            var $timeOut = $("#timeOut");
+            var $extendedTimeOut = $("#extendedTimeOut");
+            var $showEasing = $("#showEasing");
+            var $hideEasing = $("#hideEasing");
+            var $showMethod = $("#showMethod");
+            var $hideMethod = $("#hideMethod");
             var toastIndex = toastCount++;
-            var addClear = $('#addClear').prop('checked');
+            var addClear = $("#addClear").prop("checked");
 
             toastr.options = {
-                closeButton: $('#closeButton').prop('checked'),
-                debug: $('#debugInfo').prop('checked'),
-                newestOnTop: $('#newestOnTop').prop('checked'),
-                progressBar: $('#progressBar').prop('checked'),
-                positionClass: $('#positionGroup input:radio:checked').val() || 'toast-top-right',
-                preventDuplicates: $('#preventDuplicates').prop('checked'),
+                closeButton: $("#closeButton").prop("checked"),
+                debug: $("#debugInfo").prop("checked"),
+                newestOnTop: $("#newestOnTop").prop("checked"),
+                progressBar: $("#progressBar").prop("checked"),
+                positionClass: $("#positionGroup input:radio:checked").val() || "toast-top-right",
+                preventDuplicates: $("#preventDuplicates").prop("checked"),
                 onclick: null
             };
 
-            if ($('#addBehaviorOnToastClick').prop('checked')) {
-                toastr.options.onclick = function () {
-                    alert('You can perform some custom action after a toast goes away');
+            if ($("#addBehaviorOnToastClick").prop("checked")) {
+                toastr.options.onclick = function() {
+                    alert("You can perform some custom action after a toast goes away");
                 };
             }
 
@@ -104,53 +105,63 @@ var KTToastrDemo = function() {
                 msg = getMessage();
             }
 
-            $('#toastrOptions').text(
-                    'toastr.options = '
-                    + JSON.stringify(toastr.options, null, 2)
-                    + ';'
-                    + '\n\ntoastr.'
-                    + shortCutFunction
-                    + '("'
-                    + msg
-                    + (title ? '", "' + title : '')
-                    + '");'
+            $("#toastrOptions").text(
+                "toastr.options = " +
+                JSON.stringify(toastr.options, null, 2) +
+                ";" +
+                "\n\ntoastr." +
+                shortCutFunction +
+                '("' +
+                msg +
+                (title ? '", "' + title : "") +
+                '");'
             );
 
-            var $toast = toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
+            var $toast =
+                toastr[shortCutFunction](msg, title); // Wire up an event handler to a button in the toast, if it exists
             $toastlast = $toast;
 
-            if(typeof $toast === 'undefined'){
+            if (typeof $toast === "undefined") {
                 return;
             }
 
-            if ($toast.find('#okBtn').length) {
-                $toast.delegate('#okBtn', 'click', function () {
-                    alert('you clicked me. i was toast #' + toastIndex + '. goodbye!');
-                    $toast.remove();
-                });
+            if ($toast.find("#okBtn").length) {
+                $toast.delegate("#okBtn",
+                    "click",
+                    function() {
+                        alert("you clicked me. i was toast #" + toastIndex + ". goodbye!");
+                        $toast.remove();
+                    });
             }
-            if ($toast.find('#surpriseBtn').length) {
-                $toast.delegate('#surpriseBtn', 'click', function () {
-                    alert('Surprise! you clicked me. i was toast #' + toastIndex + '. You could perform an action here.');
-                });
+            if ($toast.find("#surpriseBtn").length) {
+                $toast.delegate("#surpriseBtn",
+                    "click",
+                    function() {
+                        alert("Surprise! you clicked me. i was toast #" +
+                            toastIndex +
+                            ". You could perform an action here.");
+                    });
             }
-            if ($toast.find('.clear').length) {
-                $toast.delegate('.clear', 'click', function () {
-                    toastr.clear($toast, { force: true });
-                });
+            if ($toast.find(".clear").length) {
+                $toast.delegate(".clear",
+                    "click",
+                    function() {
+                        toastr.clear($toast, { force: true });
+                    });
             }
         });
 
-        function getLastToast(){
+        function getLastToast() {
             return $toastlast;
         }
-        $('#clearlasttoast').click(function () {
+
+        $("#clearlasttoast").click(function() {
             toastr.clear(getLastToast());
         });
-        $('#cleartoasts').click(function () {
+        $("#cleartoasts").click(function() {
             toastr.clear();
         });
-    }
+    };
 
     return {
         // public functions

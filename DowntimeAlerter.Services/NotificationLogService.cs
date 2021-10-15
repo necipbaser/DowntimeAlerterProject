@@ -1,17 +1,15 @@
-﻿using DowntimeAlerter.Core;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DowntimeAlerter.Core;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DowntimeAlerter.Services
 {
-    public class NotificationLogService: INotificationLogService
+    public class NotificationLogService : INotificationLogService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public NotificationLogService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

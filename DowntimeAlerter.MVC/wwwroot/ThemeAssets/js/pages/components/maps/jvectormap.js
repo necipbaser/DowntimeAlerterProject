@@ -6,7 +6,7 @@ var KTjVectorMap = function() {
     // Private functions
 
     var demo1 = function() {
-    }
+    };
 
     return {
         // public functions

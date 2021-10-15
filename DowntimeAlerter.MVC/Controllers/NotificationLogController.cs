@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
 using DowntimeAlerter.MVC.ActionFilters;
 using DowntimeAlerter.MVC.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
@@ -16,16 +16,18 @@ namespace DowntimeAlerter.MVC.Controllers
     public class NotificationLogController : Controller
     {
         private readonly ILogger<NotificationLogController> _logger;
-        private readonly INotificationLogService _notificaitonLogService;
         private readonly IMapper _mapper;
+        private readonly INotificationLogService _notificaitonLogService;
 
 
-        public NotificationLogController(ILogger<NotificationLogController> logger, INotificationLogService notificaitionLogService, IMapper mapper)
+        public NotificationLogController(ILogger<NotificationLogController> logger,
+            INotificationLogService notificaitionLogService, IMapper mapper)
         {
             _notificaitonLogService = notificaitionLogService;
             _logger = logger;
             _mapper = mapper;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -37,13 +39,14 @@ namespace DowntimeAlerter.MVC.Controllers
             try
             {
                 var logs = await _notificaitonLogService.GetLogs();
-                var logsDto = _mapper.Map<IEnumerable<NotificationLog>, IEnumerable<NotificationLogDTO>>(logs).OrderByDescending(o => o.CheckedDate);
-                return Json(new { data = logsDto });
+                var logsDto = _mapper.Map<IEnumerable<NotificationLog>, IEnumerable<NotificationLogDTO>>(logs)
+                    .OrderByDescending(o => o.CheckedDate);
+                return Json(new {data = logsDto});
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return Json(new { data = false });
+                return Json(new {data = false});
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿
-namespace DowntimeAlerter.Core.Models
+﻿namespace DowntimeAlerter.Core.Models
 {
     public class SiteEmail
     {

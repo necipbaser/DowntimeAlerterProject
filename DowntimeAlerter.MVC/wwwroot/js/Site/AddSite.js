@@ -1,12 +1,12 @@
 ﻿//# sourceURL=AddSite.js
 var addedEmailList = [];
 var AddSite = {
-    Init: function () {
+    Init: function() {
         AddSite.LoadFormData();
     },
-    LoadFormData: function () {
+    LoadFormData: function() {
     },
-    Save: function () {
+    Save: function() {
         //parameters
         var siteName = $("#txtSiteName").val();
         var siteUrl = $("#txtSiteUrl").val();
@@ -18,7 +18,11 @@ var AddSite = {
         if (siteUrl == "")
             return Util.Notification.Swall("warning", "Site Url cannot be empty!", "Error", "Ok", false);
         if (siteIntervalTime < 30)
-            return Util.Notification.Swall("warning", "The Interval Time must be greater or equal 30 seconds.", "Error", "Ok", false);
+            return Util.Notification.Swall("warning",
+                "The Interval Time must be greater or equal 30 seconds.",
+                "Error",
+                "Ok",
+                false);
 
         if (addedEmailList.length < 1)
             return Util.Notification.Swall("warning", "Please enter at least 1 e-mail address.", "Error", "Ok", false);
@@ -38,7 +42,7 @@ var AddSite = {
         Util.BlockUI.Block("Please wait, the site is being added...");
         Util.Ajax.Generic("Site", "CreateSite", AddSite.CallbackSave, formData, true);
     },
-    CallbackSave: function (response) {
+    CallbackSave: function(response) {
         Util.BlockUI.UnBlock();
         if (response.success == true) {
             Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
@@ -49,7 +53,7 @@ var AddSite = {
             return Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);
         }
     },
-    AddEmail: function () {
+    AddEmail: function() {
         var emailAdress = $("#txtEmail").val();
         if (emailAdress == "" || Util.EmailValidate.EmailValidate(emailAdress) != true)
             return Util.Notification.Swall("warning", "Please enter a correct e-mail address!", "Error", "Ok", false);
@@ -61,33 +65,36 @@ var AddSite = {
             AddSite.GetAddedEmailList();
         }
     },
-    DeleteEmail: function (email) {
-        addedEmailList = jQuery.grep(addedEmailList, function (value) {
-            return value != email;
-        });
+    DeleteEmail: function(email) {
+        addedEmailList = jQuery.grep(addedEmailList,
+            function(value) {
+                return value != email;
+            });
         AddSite.GetAddedEmailList();
     },
-    GetAddedEmailList: function () {
-        var html = '';
+    GetAddedEmailList: function() {
+        var html = "";
         if (addedEmailList.length < 1)
             $("#tblAddedEmail").html(html);
         else {
             for (var i = 0; i < addedEmailList.length; i++) {
-                html += '<tr>';
-                html += '<td>' + (i + 1) + '</td>';
-                html += '<td>' + addedEmailList[i] + '</td>';
-                html += '<td>';
-                html += '<a style="height:18px;" onclick="AddSite.DeleteEmail(`' + addedEmailList[i] + '`)" class="btn btn-lg btn-clean btn-icon btn-icon-lg" title="Delete"> <i style="color:#e41dc2;" class="fa fa-trash-alt"></i></a>';
-                html += '</button>';
-                html += '</td>';
-                html += '</tr>';
+                html += "<tr>";
+                html += "<td>" + (i + 1) + "</td>";
+                html += "<td>" + addedEmailList[i] + "</td>";
+                html += "<td>";
+                html += '<a style="height:18px;" onclick="AddSite.DeleteEmail(`' +
+                    addedEmailList[i] +
+                    '`)" class="btn btn-lg btn-clean btn-icon btn-icon-lg" title="Delete"> <i style="color:#e41dc2;" class="fa fa-trash-alt"></i></a>';
+                html += "</button>";
+                html += "</td>";
+                html += "</tr>";
             }
             $("#tblAddedEmail").html(html);
         }
     },
-    UrlCheck: function () {
+    UrlCheck: function() {
         var url = $("#txtSiteUrl").val();
-        $("#txtSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
+        $("#txtSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ""));
 
         var siteUrl = $("#txtSiteUrl").val();
         var selectSsl = $("#selectSsl").val();
@@ -101,9 +108,9 @@ var AddSite = {
             $("#urlCheckIcon").css("color", "red");
         }
     },
-    RemoveSpace: function () {
+    RemoveSpace: function() {
         var email = $("#txtEmail").val();
-        email = email.replace(/\s/g, '');
+        email = email.replace(/\s/g, "");
         $("#txtEmail").val(email);
     }
-}
+};

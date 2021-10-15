@@ -7,60 +7,60 @@ var KTGoogleMapsDemo = function() {
 
     var demo1 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_1',
+            div: "#kt_gmap_1",
             lat: -12.043333,
             lng: -77.028333
         });
-    }
+    };
 
     var demo2 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_2',
+            div: "#kt_gmap_2",
             zoom: 16,
             lat: -12.043333,
             lng: -77.028333,
             click: function(e) {
-                alert('click');
+                alert("click");
             },
             dragend: function(e) {
-                alert('dragend');
+                alert("dragend");
             }
         });
-    }
+    };
 
     var demo3 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_3',
+            div: "#kt_gmap_3",
             lat: -51.38739,
             lng: -6.187181,
         });
         map.addMarker({
             lat: -51.38739,
             lng: -6.187181,
-            title: 'Lima',
+            title: "Lima",
             details: {
                 database_id: 42,
-                author: 'HPNeo'
+                author: "HPNeo"
             },
             click: function(e) {
                 if (console.log) console.log(e);
-                alert('You clicked in this marker');
+                alert("You clicked in this marker");
             }
         });
         map.addMarker({
             lat: -12.042,
             lng: -77.028333,
-            title: 'Marker with InfoWindow',
+            title: "Marker with InfoWindow",
             infoWindow: {
                 content: '<span style="color:#000">HTML Content!</span>'
             }
         });
         map.setZoom(5);
-    }
+    };
 
     var demo4 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_4',
+            div: "#kt_gmap_4",
             lat: -12.043333,
             lng: -77.028333
         });
@@ -70,7 +70,7 @@ var KTGoogleMapsDemo = function() {
                 map.setCenter(position.coords.latitude, position.coords.longitude);
             },
             error: function(error) {
-                alert('Geolocation failed: ' + error.message);
+                alert("Geolocation failed: " + error.message);
             },
             not_supported: function() {
                 alert("Your browser does not support geolocation");
@@ -79,11 +79,11 @@ var KTGoogleMapsDemo = function() {
                 //alert("Geolocation Done!");
             }
         });
-    }
+    };
 
     var demo5 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_5',
+            div: "#kt_gmap_5",
             lat: -12.043333,
             lng: -77.028333,
             click: function(e) {
@@ -104,15 +104,15 @@ var KTGoogleMapsDemo = function() {
 
         map.drawPolyline({
             path: path,
-            strokeColor: '#131540',
+            strokeColor: "#131540",
             strokeOpacity: 0.6,
             strokeWeight: 6
         });
-    }
+    };
 
     var demo6 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_6',
+            div: "#kt_gmap_6",
             lat: -12.043333,
             lng: -77.028333
         });
@@ -126,81 +126,82 @@ var KTGoogleMapsDemo = function() {
 
         var polygon = map.drawPolygon({
             paths: path,
-            strokeColor: '#BBD8E9',
+            strokeColor: "#BBD8E9",
             strokeOpacity: 1,
             strokeWeight: 3,
-            fillColor: '#BBD8E9',
+            fillColor: "#BBD8E9",
             fillOpacity: 0.6
         });
-    }
+    };
 
     var demo7 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_7',
+            div: "#kt_gmap_7",
             lat: -12.043333,
             lng: -77.028333
         });
-        $('#kt_gmap_7_btn').click(function(e) {
+        $("#kt_gmap_7_btn").click(function(e) {
             e.preventDefault();
-            KTUtil.scrollTo('kt_gmap_7_btn', 400);
+            KTUtil.scrollTo("kt_gmap_7_btn", 400);
             map.travelRoute({
                 origin: [-12.044012922866312, -77.02470665341184],
                 destination: [-12.090814532191756, -77.02271108990476],
-                travelMode: 'driving',
+                travelMode: "driving",
                 step: function(e) {
-                    $('#kt_gmap_7_routes').append('<li>' + e.instructions + '</li>');
-                    $('#kt_gmap_7_routes li:eq(' + e.step_number + ')').delay(800 * e.step_number).fadeIn(500, function() {
-                        map.setCenter(e.end_location.lat(), e.end_location.lng());
-                        map.drawPolyline({
-                            path: e.path,
-                            strokeColor: '#131540',
-                            strokeOpacity: 0.6,
-                            strokeWeight: 6
+                    $("#kt_gmap_7_routes").append("<li>" + e.instructions + "</li>");
+                    $("#kt_gmap_7_routes li:eq(" + e.step_number + ")").delay(800 * e.step_number).fadeIn(500,
+                        function() {
+                            map.setCenter(e.end_location.lat(), e.end_location.lng());
+                            map.drawPolyline({
+                                path: e.path,
+                                strokeColor: "#131540",
+                                strokeOpacity: 0.6,
+                                strokeWeight: 6
+                            });
                         });
-                    });
                 }
             });
         });
-    }
+    };
 
     var demo8 = function() {
         var map = new GMaps({
-            div: '#kt_gmap_8',
+            div: "#kt_gmap_8",
             lat: -12.043333,
             lng: -77.028333
         });
 
         var handleAction = function() {
-            var text = $.trim($('#kt_gmap_8_address').val());
+            var text = $.trim($("#kt_gmap_8_address").val());
             GMaps.geocode({
                 address: text,
                 callback: function(results, status) {
-                    if (status == 'OK') {
+                    if (status == "OK") {
                         var latlng = results[0].geometry.location;
                         map.setCenter(latlng.lat(), latlng.lng());
                         map.addMarker({
                             lat: latlng.lat(),
                             lng: latlng.lng()
                         });
-                        KTUtil.scrollTo('kt_gmap_8');
+                        KTUtil.scrollTo("kt_gmap_8");
                     }
                 }
             });
-        }
+        };
 
-        $('#kt_gmap_8_btn').click(function(e) {
+        $("#kt_gmap_8_btn").click(function(e) {
             e.preventDefault();
             handleAction();
         });
 
         $("#kt_gmap_8_address").keypress(function(e) {
             var keycode = (e.keyCode ? e.keyCode : e.which);
-            if (keycode == '13') {
+            if (keycode == "13") {
                 e.preventDefault();
                 handleAction();
             }
         });
-    }
+    };
 
     return {
         // public functions

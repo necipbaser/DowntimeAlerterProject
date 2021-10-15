@@ -1,31 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DowntimeAlerter.Data.Repositories
 {
     public class SiteEmailRepository : Repository<SiteEmail>, ISiteEmailRepository
     {
         public SiteEmailRepository(DowntimeAlerterDbContext context)
-           : base(context)
-        { }
+            : base(context)
+        {
+        }
+
+        private DowntimeAlerterDbContext DowntimeAlerterDbContext => Context as DowntimeAlerterDbContext;
 
         public async Task<IEnumerable<SiteEmail>> GetAllWithSiteAsync()
         {
             return await DowntimeAlerterDbContext.SiteEmails
-                 .Include(m => m.Site)
-                 .ToListAsync();
+                .Include(m => m.Site)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<SiteEmail>> GetAllWithSiteBySiteIdAsync(int siteId)
         {
             return await DowntimeAlerterDbContext.SiteEmails
-               .Include(m => m.Site)
-               .Where(m => m.SiteId == siteId)
-               .ToListAsync();
+                .Include(m => m.Site)
+                .Where(m => m.SiteId == siteId)
+                .ToListAsync();
         }
 
         public async Task<SiteEmail> GetWithSiteByIdAsync(int id)
@@ -38,12 +41,7 @@ namespace DowntimeAlerter.Data.Repositories
         public async Task<IEnumerable<SiteEmail>> GetAllSiteEmailByEmail(SiteEmail siteEmail)
         {
             return await DowntimeAlerterDbContext.SiteEmails
-              .Where(w=>w.Email==siteEmail.Email && w.SiteId==siteEmail.SiteId).ToListAsync();
-        }
-
-        private DowntimeAlerterDbContext DowntimeAlerterDbContext
-        {
-            get { return Context as DowntimeAlerterDbContext; }
+                .Where(w => w.Email == siteEmail.Email && w.SiteId == siteEmail.SiteId).ToListAsync();
         }
     }
 }

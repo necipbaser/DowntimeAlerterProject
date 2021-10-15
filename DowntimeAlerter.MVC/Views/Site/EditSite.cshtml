@@ -4,19 +4,13 @@
     Layout = null;
 }
 <style>
-    .select2-container {
-        width: 100% !important;
-    }
+    .select2-container { width: 100% !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 10px !important;
-    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 10px !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        top: 12px !important;
-    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow { top: 12px !important; }
 </style>
-<div style="display:none" id="selectedSiteId">@Model.Id</div>
+<div style="display: none" id="selectedSiteId">@Model.Id</div>
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
@@ -27,9 +21,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body" style="background-color: #f1f0f0">
-        <div class="row" style="color:black!important">
+        <div class="row" style="color: black !important">
             <div class="col-6">
-                <div class="kt-portlet" style="height:400px">
+                <div class="kt-portlet" style="height: 400px">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
                         <div class="kt-section">
@@ -37,13 +31,13 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Name <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Name <span style="color: red">*</span></label>
                                             <input class="form-control " type="text" value="@Model.Name" placeholder="Site name..." id="txtEditSiteName">
                                         </div>
                                     </div>
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color: red">*</span></label>
                                             <select class="form-control" id="selectEditSsl">
                                                 <option value="http://">http</option>
                                                 <option value="https://">https</option>
@@ -52,18 +46,18 @@
                                     </div>
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color: red">*</span></label>
                                             <input class="form-control" type="text" value="@Model.Url" placeholder="Url..." id="txtEditSiteUrl" onkeyup="EditSite.UrlCheck()">
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Interval Time (second)<span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Interval Time (second)<span style="color: red">*</span></label>
                                             <input class="form-control " type="number" value="@Model.IntervalTime" placeholder="Interval time..." id="txtEditIntervalTime">
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button type="button" style="float:left; width:200px" class="btn btn-success" onclick="EditSite.Update()"><i class="fa fa-save"></i>Update</button>
+                                        <button type="button" style="float: left; width: 200px" class="btn btn-success" onclick="EditSite.Update()"><i class="fa fa-save"></i>Update</button>
                                     </div>
                                 </div>
                             </div>
@@ -72,34 +66,34 @@
                 </div>
             </div>
             <div class="col-6">
-                <div class="kt-portlet" style="height:400px">
+                <div class="kt-portlet" style="height: 400px">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
                         <div class="kt-section">
                             <div class="kt-section__content">
-                                <div class="row" style="margin-top:25px">
+                                <div class="row" style="margin-top: 25px">
                                     <div class="col-9">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color: red">*</span></label>
                                             <input type="text" value="" class="form-control " name="email" id="txtEditEmail" placeholder="Enter email..">
                                         </div>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-brand btn-block" style="margin-top:35px" onclick="EditSite.AddEmail()">
+                                        <button class="btn btn-brand btn-block" style="margin-top: 35px" onclick="EditSite.AddEmail()">
                                             <i class="flaticon-add"></i>
                                             Add Email
                                         </button>
                                     </div>
                                 </div>
-                                <div class="row" style="margin-top:25px">
+                                <div class="row" style="margin-top: 25px">
                                     <div class="col-12">
                                         <table class="table table-hover table-bordered">
                                             <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Email</th>
-                                                    <th style=" width: 10px;"></th>
-                                                </tr>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Email</th>
+                                                <th style="width: 10px;"></th>
+                                            </tr>
                                             </thead>
                                             <tbody id="tblEditSiteEmails"></tbody>
                                         </table>
@@ -116,7 +110,7 @@
 <script src="~/js/Site/EditSite.js"></script>
 
 <script>
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
         eval("EditSite.Init();");
     });
 </script>

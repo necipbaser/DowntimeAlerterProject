@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DowntimeAlerter.Core.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
+using DowntimeAlerter.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace DowntimeAlerter.Data.Repositories
 {
@@ -17,6 +16,7 @@ namespace DowntimeAlerter.Data.Repositories
         {
             Context = context;
         }
+
         public async Task AddAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity);

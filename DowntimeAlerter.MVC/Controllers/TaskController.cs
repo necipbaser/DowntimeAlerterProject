@@ -1,38 +1,37 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Hangfire;
-using Microsoft.Extensions.Logging;
-using DowntimeAlerter.Core.Services;
-using AutoMapper;
-using DowntimeAlerter.Core.Models;
-using DowntimeAlerter.MVC.DTO;
 using System.Net.Http;
-using System.Net;
-using MimeKit;
-using Microsoft.Extensions.Options;
-using MailKit.Security;
-using MailKit.Net.Smtp;
-using Hangfire.Storage;
-using DowntimeAlerter.Core.Utilities;
+using AutoMapper;
 using DowntimeAlerter.Core.Enums;
-using DowntimeAlerter.Services;
+using DowntimeAlerter.Core.Models;
+using DowntimeAlerter.Core.Services;
+using DowntimeAlerter.Core.Utilities;
+using DowntimeAlerter.MVC.DTO;
+using Hangfire;
+using Hangfire.Storage;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MimeKit;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
     public class TaskController : Controller
     {
-        private readonly ILogger<TaskController> _logger;
-        private readonly ISiteService _siteService;
-        private readonly ISiteEmailService _siteEmailService;
-        private readonly INotificationLogService _notificaitionLogService;
-        private readonly IMapper _mapper;
         private readonly HttpClient _httpClient;
+        private readonly ILogger<TaskController> _logger;
         private readonly MailSettings _mailSettings;
+        private readonly IMapper _mapper;
+        private readonly INotificationLogService _notificaitionLogService;
+        private readonly ISiteEmailService _siteEmailService;
+        private readonly ISiteService _siteService;
 
-        public TaskController(ILogger<TaskController> logger, ISiteService siteService, IMapper mapper, IOptions<MailSettings> mailSettings, ISiteEmailService siteEmailService,INotificationLogService notificaitionLogService)
+        public TaskController(ILogger<TaskController> logger, ISiteService siteService, IMapper mapper,
+            IOptions<MailSettings> mailSettings, ISiteEmailService siteEmailService,
+            INotificationLogService notificaitionLogService)
         {
             _siteService = siteService;
             _siteEmailService = siteEmailService;
@@ -55,6 +54,7 @@ namespace DowntimeAlerter.MVC.Controllers
                 item.SiteEmails = siteEmailDTO;
                 item.CheckedDate = DateTime.Now;
             }
+
             RecurringJob.AddOrUpdate(() => SendMail(siteResources), Cron.Minutely);
         }
 
@@ -66,29 +66,28 @@ namespace DowntimeAlerter.MVC.Controllers
                 foreach (var item in siteResources)
                 {
                     var timeDifference = (DateTime.Now - item.CheckedDate).TotalSeconds;
-                    if (!(timeDifference >= item.IntervalTime))
-                        continue;
-                    else
+                    if (!(timeDifference >= item.IntervalTime)) continue;
+
+                    try
                     {
-                        try
-                        {
-                            var userEmails = item.SiteEmails.Select(s => s.Email).ToList();
-                            SendEmailToSiteUsers(userEmails,item);
-                        }
-                        catch (Exception ex)
-                        {
-                            var notificaitionLog = new NotificationLog();
-                            string message = item.Url + " Name Not Resolved.";
-                            notificaitionLog.Message = message;
-                            notificaitionLog.SiteName = item.Name;
-                            notificaitionLog.State = "Name Not Resolved";
-                            notificaitionLog.NotificationType = NotificationType.Email;
-                            SaveNotificatonLog(notificaitionLog);
-                            _logger.LogError("An error occured for " + item.Name + " while checking health of it. System Message:" +
-                                ex.Message);
-                        }
-                        item.CheckedDate = DateTime.Now;
+                        var userEmails = item.SiteEmails.Select(s => s.Email).ToList();
+                        SendEmailToSiteUsers(userEmails, item);
                     }
+                    catch (Exception ex)
+                    {
+                        var notificaitionLog = new NotificationLog();
+                        var message = item.Url + " Name Not Resolved.";
+                        notificaitionLog.Message = message;
+                        notificaitionLog.SiteName = item.Name;
+                        notificaitionLog.State = "Name Not Resolved";
+                        notificaitionLog.NotificationType = NotificationType.Email;
+                        SaveNotificatonLog(notificaitionLog);
+                        _logger.LogError("An error occured for " + item.Name +
+                                         " while checking health of it. System Message:" +
+                                         ex.Message);
+                    }
+
+                    item.CheckedDate = DateTime.Now;
                 }
             }
             catch (Exception ex)
@@ -102,13 +101,13 @@ namespace DowntimeAlerter.MVC.Controllers
             foreach (var userEmail in userEmails)
             {
                 var responseMsg = _httpClient.GetAsync(site.Url).GetAwaiter().GetResult();
-                MailRequest request = new MailRequest();
+                var request = new MailRequest();
                 request.ToEmail = userEmail;
                 request.Subject = "Downtime Alerter";
                 var notificaitionLog = new NotificationLog();
-                if ((int)responseMsg.StatusCode >= 200 && (int)responseMsg.StatusCode <= 299)
+                if ((int) responseMsg.StatusCode >= 200 && (int) responseMsg.StatusCode <= 299)
                 {
-                    string message = site.Url + " is UP.";
+                    var message = site.Url + " is UP.";
                     notificaitionLog.Message = message;
                     notificaitionLog.SiteName = site.Name;
                     notificaitionLog.State = "Up";
@@ -118,7 +117,7 @@ namespace DowntimeAlerter.MVC.Controllers
                 }
                 else
                 {
-                    string message = site.Url + " is DOWN.";
+                    var message = site.Url + " is DOWN.";
                     notificaitionLog.Message = message;
                     notificaitionLog.SiteName = site.Name;
                     notificaitionLog.State = "Down";
@@ -159,9 +158,7 @@ namespace DowntimeAlerter.MVC.Controllers
             using (var connection = JobStorage.Current.GetConnection())
             {
                 foreach (var recurringJob in connection.GetRecurringJobs())
-                {
                     RecurringJob.RemoveIfExists(recurringJob.Id);
-                }
             }
         }
 

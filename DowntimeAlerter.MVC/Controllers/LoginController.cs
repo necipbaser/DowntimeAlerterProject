@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using DowntimeAlerter.Core.Services;
-using DowntimeAlerter.Core.Models;
-using DowntimeAlerter.MVC.DTO;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using DowntimeAlerter.Core.Models;
+using DowntimeAlerter.Core.Services;
 using DowntimeAlerter.Core.Utilities;
+using DowntimeAlerter.MVC.DTO;
 using DowntimeAlerter.MVC.Models;
 using Hangfire;
 using Hangfire.Storage;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
     public class LoginController : Controller
     {
         private readonly ILogger<LoginController> _logger;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
         public LoginController(ILogger<LoginController> logger, IUserService userService, IMapper mapper)
         {
@@ -38,33 +38,31 @@ namespace DowntimeAlerter.MVC.Controllers
             if (ModelState.IsValid)
             {
                 if (model.Username == string.Empty || model.Password == string.Empty)
-                    return Json(new { success = true, msg = "Please enter username and password.!" });
+                    return Json(new {success = true, msg = "Please enter username and password.!"});
                 var user = _mapper.Map<UserDTO, User>(model);
                 try
                 {
-                    string md5Password = SecurePasswordHasher.CalculateMD5Hash(model.Password);
+                    var md5Password = SecurePasswordHasher.CalculateMD5Hash(model.Password);
                     user.Password = md5Password;
                     var returnUser = await _userService.GetUserAsync(user);
                     if (returnUser != null)
                     {
-                        CookieOptions option = new CookieOptions();
+                        var option = new CookieOptions();
                         option.Expires = DateTime.Now.AddMinutes(60);
                         Response.Cookies.Append(ProjectConstants.CookieName, returnUser.Id.ToString(), option);
-                        return Json(new { success = true, msg = string.Empty });
+                        return Json(new {success = true, msg = string.Empty});
                     }
-                    else
-                    {
-                        return Json(new { success = false, msg = "Username or password is incorrect!" });
-                    }
+
+                    return Json(new {success = false, msg = "Username or password is incorrect!"});
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex.Message);
-                    return Json(new { success = false, msg = "An error was occured" });
+                    return Json(new {success = false, msg = "An error was occured"});
                 }
             }
-            else
-                return Json(new { success = true, msg = "model is not valid." });
+
+            return Json(new {success = true, msg = "model is not valid."});
         }
 
         [HttpGet]
@@ -77,9 +75,7 @@ namespace DowntimeAlerter.MVC.Controllers
                 using (var connection = JobStorage.Current.GetConnection())
                 {
                     foreach (var recurringJob in connection.GetRecurringJobs())
-                    {
                         RecurringJob.RemoveIfExists(recurringJob.Id);
-                    }
                 }
             }
             catch (Exception ex)

@@ -1,16 +1,16 @@
 "use strict";
 // Class definition
 
-var KTBootstrapMarkdown = function () {    
+var KTBootstrapMarkdown = function() {
     // Private functions
-    var demos = function () {
-        
-    }
+    var demos = function() {
+
+    };
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

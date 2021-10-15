@@ -10,66 +10,68 @@ var KTIdleTimerDemo = function() {
         /*
         Handle raised idle/active events
         */
-        $(document).on("idle.idleTimer", function(event, elem, obj) {
-            $("#docStatus")
-                .val(function(i, v) {
-                    return v + "Idle @ " + moment().format() + " \n";
-                })
-                .removeClass("alert-success")
-                .addClass("alert-warning")
-                .scrollTop($('#docStatus')[0].scrollHeight);
-        });
-        $(document).on("active.idleTimer", function(event, elem, obj, e) {
-            $('#docStatus')
-                .val(function(i, v) {
-                    return v + "Active [" + e.type + "] [" + e.target.nodeName + "] @ " + moment().format() + " \n";
-                })
-                .addClass("alert-success")
-                .removeClass("alert-warning")
-                .scrollTop($('#docStatus')[0].scrollHeight);
-        });
+        $(document).on("idle.idleTimer",
+            function(event, elem, obj) {
+                $("#docStatus")
+                    .val(function(i, v) {
+                        return v + "Idle @ " + moment().format() + " \n";
+                    })
+                    .removeClass("alert-success")
+                    .addClass("alert-warning")
+                    .scrollTop($("#docStatus")[0].scrollHeight);
+            });
+        $(document).on("active.idleTimer",
+            function(event, elem, obj, e) {
+                $("#docStatus")
+                    .val(function(i, v) {
+                        return v + "Active [" + e.type + "] [" + e.target.nodeName + "] @ " + moment().format() + " \n";
+                    })
+                    .addClass("alert-success")
+                    .removeClass("alert-warning")
+                    .scrollTop($("#docStatus")[0].scrollHeight);
+            });
 
         /*
         Handle button events
         */
         $("#btPause").click(function() {
             $(document).idleTimer("pause");
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Paused @ " + moment().format() + " \n";
                 })
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
         $("#btResume").click(function() {
             $(document).idleTimer("resume");
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Resumed @ " + moment().format() + " \n";
                 })
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
         $("#btElapsed").click(function() {
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Elapsed (since becoming active): " + $(document).idleTimer("getElapsedTime") + " \n";
                 })
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
         $("#btDestroy").click(function() {
             $(document).idleTimer("destroy");
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Destroyed: @ " + moment().format() + " \n";
                 })
                 .removeClass("alert-success")
                 .removeClass("alert-warning")
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
@@ -78,19 +80,19 @@ var KTIdleTimerDemo = function() {
             $(document).idleTimer({
                 timeout: docTimeout
             });
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Init: @ " + moment().format() + " \n";
                 })
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
 
             //Apply classes for default state
             if ($(document).idleTimer("isIdle")) {
-                $('#docStatus')
+                $("#docStatus")
                     .removeClass("alert-success")
                     .addClass("alert-warning");
             } else {
-                $('#docStatus')
+                $("#docStatus")
                     .addClass("alert-success")
                     .removeClass("alert-warning");
             }
@@ -99,7 +101,7 @@ var KTIdleTimerDemo = function() {
         });
 
         //Clear old statuses
-        $('#docStatus').val('');
+        $("#docStatus").val("");
 
         //Start timeout, passing no options
         //Same as $.idleTimer(docTimeout, docOptions);
@@ -113,22 +115,22 @@ var KTIdleTimerDemo = function() {
                 })
                 .removeClass("alert-success")
                 .addClass("alert-warning")
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
         } else {
-            $('#docStatus')
+            $("#docStatus")
                 .val(function(i, v) {
                     return v + "Initial Active State @ " + moment().format() + " \n";
                 })
                 .addClass("alert-success")
                 .removeClass("alert-warning")
-                .scrollTop($('#docStatus')[0].scrollHeight);
+                .scrollTop($("#docStatus")[0].scrollHeight);
         }
 
 
         //For demo purposes, display the actual timeout on the page
-        $('#docTimeout').text(docTimeout / 1000);
+        $("#docTimeout").text(docTimeout / 1000);
 
-    }
+    };
 
     var demo2 = function() {
         //Define textarea settings
@@ -138,50 +140,52 @@ var KTIdleTimerDemo = function() {
         /*
         Handle raised idle/active events
         */
-        $('#elStatus').on("idle.idleTimer", function(event, elem, obj) {
-            //If you dont stop propagation it will bubble up to document event handler
-            event.stopPropagation();
+        $("#elStatus").on("idle.idleTimer",
+            function(event, elem, obj) {
+                //If you dont stop propagation it will bubble up to document event handler
+                event.stopPropagation();
 
-            $('#elStatus')
-                .val(function(i, v) {
-                    return v + "Idle @ " + moment().format() + " \n";
-                })
-                .removeClass("alert-success")
-                .addClass("alert-warning")
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                $("#elStatus")
+                    .val(function(i, v) {
+                        return v + "Idle @ " + moment().format() + " \n";
+                    })
+                    .removeClass("alert-success")
+                    .addClass("alert-warning")
+                    .scrollTop($("#elStatus")[0].scrollHeight);
 
-        });
-        $('#elStatus').on("active.idleTimer", function(event) {
-            //If you dont stop propagation it will bubble up to document event handler
-            event.stopPropagation();
+            });
+        $("#elStatus").on("active.idleTimer",
+            function(event) {
+                //If you dont stop propagation it will bubble up to document event handler
+                event.stopPropagation();
 
-            $('#elStatus')
-                .val(function(i, v) {
-                    return v + "Active @ " + moment().format() + " \n";
-                })
-                .addClass("alert-success")
-                .removeClass("alert-warning")
-                .scrollTop($('#elStatus')[0].scrollHeight);
-        });
+                $("#elStatus")
+                    .val(function(i, v) {
+                        return v + "Active @ " + moment().format() + " \n";
+                    })
+                    .addClass("alert-success")
+                    .removeClass("alert-warning")
+                    .scrollTop($("#elStatus")[0].scrollHeight);
+            });
 
         /*
         Handle button events
         */
         $("#btReset").click(function() {
-            $('#elStatus')
+            $("#elStatus")
                 .idleTimer("reset")
                 .val(function(i, v) {
                     return v + "Reset @ " + moment().format() + " \n";
                 })
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
 
             //Apply classes for default state
             if ($("#elStatus").idleTimer("isIdle")) {
-                $('#elStatus')
+                $("#elStatus")
                     .removeClass("alert-success")
                     .addClass("alert-warning");
             } else {
-                $('#elStatus')
+                $("#elStatus")
                     .addClass("alert-success")
                     .removeClass("alert-warning");
             }
@@ -189,35 +193,35 @@ var KTIdleTimerDemo = function() {
             return false;
         });
         $("#btRemaining").click(function() {
-            $('#elStatus')
+            $("#elStatus")
                 .val(function(i, v) {
                     return v + "Remaining: " + $("#elStatus").idleTimer("getRemainingTime") + " \n";
                 })
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
         $("#btLastActive").click(function() {
-            $('#elStatus')
+            $("#elStatus")
                 .val(function(i, v) {
                     return v + "LastActive: " + $("#elStatus").idleTimer("getLastActiveTime") + " \n";
                 })
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
         $("#btState").click(function() {
-            $('#elStatus')
+            $("#elStatus")
                 .val(function(i, v) {
                     return v + "State: " + ($("#elStatus").idleTimer("isIdle") ? "idle" : "active") + " \n";
                 })
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
             $(this).blur();
             return false;
         });
 
         //Clear value if there was one cached & start time
-        $('#elStatus').val('').idleTimer(taTimeout);
+        $("#elStatus").val("").idleTimer(taTimeout);
 
         //For demo purposes, show initial state
         if ($("#elStatus").idleTimer("isIdle")) {
@@ -227,21 +231,21 @@ var KTIdleTimerDemo = function() {
                 })
                 .removeClass("alert-success")
                 .addClass("alert-warning")
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
         } else {
-            $('#elStatus')
+            $("#elStatus")
                 .val(function(i, v) {
                     return v + "Initial Active @ " + moment().format() + " \n";
                 })
                 .addClass("alert-success")
                 .removeClass("alert-warning")
-                .scrollTop($('#elStatus')[0].scrollHeight);
+                .scrollTop($("#elStatus")[0].scrollHeight);
         }
 
         // Display the actual timeout on the page
-        $('#elTimeout').text(taTimeout / 1000);
+        $("#elTimeout").text(taTimeout / 1000);
 
-    }
+    };
 
     return {
         //main function to initiate the module

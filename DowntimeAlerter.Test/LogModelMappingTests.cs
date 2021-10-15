@@ -1,8 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.MVC.DTO;
 using DowntimeAlerter.MVC.Mapping;
-using System;
 using Xunit;
 
 namespace DowntimeAlerter.Test
@@ -16,7 +16,7 @@ namespace DowntimeAlerter.Test
             var mapper = config.CreateMapper();
 
             //arrange act
-            Log log = new Log();
+            var log = new Log();
             log.Id = 1;
             log.Level = "Up";
             log.Message = "Message";

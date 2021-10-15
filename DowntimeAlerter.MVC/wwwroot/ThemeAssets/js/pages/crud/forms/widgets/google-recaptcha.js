@@ -1,17 +1,17 @@
 // Class definition
 
-var KTBootstrapTouchspin = function () {
-    
+var KTBootstrapTouchspin = function() {
+
     // Private functions
-    var demos = function () {
+    var demos = function() {
         // minimum setup
         //$('#kt_timepicker_1, #kt_timepicker_1_modal').timepicker();
-    }
+    };
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
 using DowntimeAlerter.MVC.ActionFilters;
 using DowntimeAlerter.MVC.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
@@ -19,7 +19,7 @@ namespace DowntimeAlerter.MVC.Controllers
         private readonly ILogService _logService;
         private readonly IMapper _mapper;
 
-        public LogController(ILogger<LogController> logger, ILogService logService,IMapper mapper)
+        public LogController(ILogger<LogController> logger, ILogService logService, IMapper mapper)
         {
             _logService = logService;
             _logger = logger;
@@ -37,13 +37,14 @@ namespace DowntimeAlerter.MVC.Controllers
             try
             {
                 var logs = await _logService.GetLogs();
-                var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs).OrderByDescending(o => o.TimeStamp).Take(1000);
-                return Json(new { data = logsDto });
+                var logsDto = _mapper.Map<IEnumerable<Log>, IEnumerable<LogDTO>>(logs)
+                    .OrderByDescending(o => o.TimeStamp).Take(1000);
+                return Json(new {data = logsDto});
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return Json(new { data = false });
+                return Json(new {data = false});
             }
         }
 
@@ -55,7 +56,6 @@ namespace DowntimeAlerter.MVC.Controllers
                 var log = await _logService.GetLog(id);
                 var logDTO = _mapper.Map<Log, LogDTO>(log);
                 return View(logDTO);
-
             }
             catch (Exception ex)
             {

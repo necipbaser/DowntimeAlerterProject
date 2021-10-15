@@ -1,11 +1,10 @@
 ﻿using System;
 using AutoMapper;
+using DowntimeAlerter.Core.Enums;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.MVC.DTO;
 using DowntimeAlerter.MVC.Mapping;
-using System;
 using Xunit;
-using DowntimeAlerter.Core.Enums;
 
 namespace DowntimeAlerter.Test
 {
@@ -18,7 +17,7 @@ namespace DowntimeAlerter.Test
             var mapper = config.CreateMapper();
 
             //arrange act
-            NotificationLog log = new NotificationLog();
+            var log = new NotificationLog();
             log.Id = 1;
             log.NotificationType = NotificationType.Email;
             log.Message = "Message";

@@ -43,7 +43,7 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
 
 */
 
-(function ($) {
+(function($) {
     var options = {
         xaxis: {
             categories: null
@@ -71,7 +71,7 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
             // FIXME: auto-detection should really not be defined here
             var s = series;
             format = [];
-            format.push({ x: true, number: true, required: true, computeRange: true});
+            format.push({ x: true, number: true, required: true, computeRange: true });
             format.push({ y: true, number: true, required: true, computeRange: true });
 
             if (s.bars.show || (s.lines.show && s.lines.fill)) {
@@ -119,7 +119,7 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
             }
         }
 
-        res.sort(function (a, b) { return a[0] - b[0]; });
+        res.sort(function(a, b) { return a[0] - b[0]; });
 
         return res;
     }
@@ -196,7 +196,7 @@ as "categories" on the axis object, e.g. plot.getAxes().xaxis.categories.
     $.plot.plugins.push({
         init: init,
         options: options,
-        name: 'categories',
-        version: '1.0'
+        name: "categories",
+        version: "1.0"
     });
 })(jQuery);

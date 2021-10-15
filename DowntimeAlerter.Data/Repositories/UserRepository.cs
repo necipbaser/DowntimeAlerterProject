@@ -1,27 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace DowntimeAlerter.Data.Repositories
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(DowntimeAlerterDbContext context)
-           : base(context)
-        { }
+            : base(context)
+        {
+        }
+
+        private DowntimeAlerterDbContext DowntimeAlerterDbContext => Context as DowntimeAlerterDbContext;
 
         public async Task<User> GetUserAsync(User user)
         {
             return await DowntimeAlerterDbContext.Users
                 .Where(w => w.UserName == user.UserName && w.Password == user.Password).FirstOrDefaultAsync();
-        }
-
-        private DowntimeAlerterDbContext DowntimeAlerterDbContext
-        {
-            get { return Context as DowntimeAlerterDbContext; }
         }
     }
 }

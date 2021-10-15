@@ -2,49 +2,53 @@
 var pageNumber = 0;
 
 // Class definition
-var KTWizard2 = function () {
+var KTWizard2 = function() {
     // Base elements
     var wizardEl;
     var formEl;
     var validator;
     var wizard;
     // Private functions
-    var initWizard = function () {
+    var initWizard = function() {
         // Initialize form wizard
-        wizard = new KTWizard('kt_wizard_v2', {
-            startStep: 1, // initial active step number
-			clickableSteps: true  // allow step clicking
-        });
+        wizard = new KTWizard("kt_wizard_v2",
+            {
+                startStep: 1, // initial active step number
+                clickableSteps: true // allow step clicking
+            });
 
         // Validation before going to next page
-        wizard.on('beforeNext', function(wizardObj) {
-            if (validator.form() !== true) {
-                wizardObj.stop();  // don't go to the next step
-            }
-            if (pageNumber == 0) {
-                var projeAdi = $("#txtProjeEkleProjeAdi").val();
-                if (projeAdi == "") {
-                    Util.Notification.Swall("warning", "Proje ismi giriniz!", "Hata", "Tamam", false);
-                    return wizardObj.stop();
+        wizard.on("beforeNext",
+            function(wizardObj) {
+                if (validator.form() !== true) {
+                    wizardObj.stop(); // don't go to the next step
                 }
-                     
+                if (pageNumber == 0) {
+                    var projeAdi = $("#txtProjeEkleProjeAdi").val();
+                    if (projeAdi == "") {
+                        Util.Notification.Swall("warning", "Proje ismi giriniz!", "Hata", "Tamam", false);
+                        return wizardObj.stop();
+                    }
 
-            }
-            pageNumber++;
-        });
 
-        wizard.on('beforePrev', function(wizardObj) {
-			if (validator.form() !== true) {
-				wizardObj.stop();  // don't go to the next step
-            }
-            pageNumber--;
-		});
+                }
+                pageNumber++;
+            });
+
+        wizard.on("beforePrev",
+            function(wizardObj) {
+                if (validator.form() !== true) {
+                    wizardObj.stop(); // don't go to the next step
+                }
+                pageNumber--;
+            });
 
         // Change event
-        wizard.on('change', function(wizard) {
-            KTUtil.scrollTop();
-        });
-    }
+        wizard.on("change",
+            function(wizard) {
+                KTUtil.scrollTop();
+            });
+    };
 
     var initValidation = function() {
         validator = formEl.validate({
@@ -53,85 +57,85 @@ var KTWizard2 = function () {
 
             // Validation rules
             rules: {
-               	//= Step 1
-				fname: {
-					required: true
-				},
-				lname: {
-					required: true
-				},
-				phone: {
-					required: true
-				},
-				emaul: {
-					required: true,
-					email: true
-				},
+                //= Step 1
+                fname: {
+                    required: true
+                },
+                lname: {
+                    required: true
+                },
+                phone: {
+                    required: true
+                },
+                emaul: {
+                    required: true,
+                    email: true
+                },
 
-				//= Step 2
-				address1: {
-					required: true
-				},
-				postcode: {
-					required: true
-				},
-				city: {
-					required: true
-				},
-				state: {
-					required: true
-				},
-				country: {
-					required: true
-				},
+                //= Step 2
+                address1: {
+                    required: true
+                },
+                postcode: {
+                    required: true
+                },
+                city: {
+                    required: true
+                },
+                state: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
 
-				//= Step 3
-				delivery: {
-					required: true
-				},
-				packaging: {
-					required: true
-				},
-				preferreddelivery: {
-					required: true
-				},
+                //= Step 3
+                delivery: {
+                    required: true
+                },
+                packaging: {
+                    required: true
+                },
+                preferreddelivery: {
+                    required: true
+                },
 
-				//= Step 4
-				locaddress1: {
-					required: true
-				},
-				locpostcode: {
-					required: true
-				},
-				loccity: {
-					required: true
-				},
-				locstate: {
-					required: true
-				},
-				loccountry: {
-					required: true
-				},
+                //= Step 4
+                locaddress1: {
+                    required: true
+                },
+                locpostcode: {
+                    required: true
+                },
+                loccity: {
+                    required: true
+                },
+                locstate: {
+                    required: true
+                },
+                loccountry: {
+                    required: true
+                },
 
-				//= Step 5
-				ccname: {
-					required: true
-				},
-				ccnumber: {
-					required: true,
-					creditcard: true
-				},
-				ccmonth: {
-					required: true
-				},
-				ccyear: {
-					required: true
-				},
-				cccvv: {
-					required: true,
-					minlength: 2,
-					maxlength: 3
-				},
+                //= Step 5
+                ccname: {
+                    required: true
+                },
+                ccnumber: {
+                    required: true,
+                    creditcard: true
+                },
+                ccmonth: {
+                    required: true
+                },
+                ccyear: {
+                    required: true
+                },
+                cccvv: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 3
+                },
             },
 
             // Display error
@@ -147,11 +151,11 @@ var KTWizard2 = function () {
             },
 
             // Submit valid form
-            submitHandler: function (form) {
+            submitHandler: function(form) {
 
             }
         });
-    }
+    };
 
     var initSubmit = function() {
         var btn = formEl.find('[data-ktwizard-type="action-submit"]');
@@ -180,13 +184,13 @@ var KTWizard2 = function () {
         //        });
         //    }
         //});
-    }
+    };
 
     return {
         // public functions
         init: function() {
-            wizardEl = KTUtil.get('kt_wizard_v2');
-            formEl = $('#kt_form');
+            wizardEl = KTUtil.get("kt_wizard_v2");
+            formEl = $("#kt_form");
 
             initWizard();
             initValidation();

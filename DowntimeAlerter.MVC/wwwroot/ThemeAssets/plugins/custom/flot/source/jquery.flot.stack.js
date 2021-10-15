@@ -35,7 +35,7 @@ charts or filled areas).
 
 */
 
-(function ($) {
+(function($) {
     var options = {
         series: { stack: null } // or number/string
     };
@@ -54,7 +54,7 @@ charts or filled areas).
             return res;
         }
 
-        function addBottomPoints (s, datapoints) {
+        function addBottomPoints(s, datapoints) {
             var formattedPoints = [];
             for (var i = 0; i < datapoints.points.length; i += 2) {
                 formattedPoints.push(datapoints.points[i]);
@@ -67,7 +67,7 @@ charts or filled areas).
                 y: true,
                 number: true,
                 required: false,
-                computeRange: s.yaxis.options.autoScale !== 'none',
+                computeRange: s.yaxis.options.autoScale !== "none",
                 defaultValue: 0
             });
             datapoints.points = formattedPoints;
@@ -92,14 +92,22 @@ charts or filled areas).
                 otherps = other.datapoints.pointsize,
                 otherpoints = other.datapoints.points,
                 newpoints = [],
-                px, py, intery, qx, qy, bottom,
+                px,
+                py,
+                intery,
+                qx,
+                qy,
+                bottom,
                 withlines = s.lines.show,
                 horizontal = s.bars.horizontal,
                 withsteps = withlines && s.lines.steps,
                 fromgap = true,
                 keyOffset = horizontal ? 1 : 0,
                 accumulateOffset = horizontal ? 0 : 1,
-                i = 0, j = 0, l, m;
+                i = 0,
+                j = 0,
+                l,
+                m;
 
             while (true) {
                 if (i >= points.length) break;
@@ -152,7 +160,10 @@ charts or filled areas).
                         // we got past point below, might need to
                         // insert interpolated extra point
                         if (withlines && i > 0 && points[i - ps] != null) {
-                            intery = py + (points[i - ps + accumulateOffset] - py) * (qx - px) / (points[i - ps + keyOffset] - px);
+                            intery = py +
+                                (points[i - ps + accumulateOffset] - py) *
+                                (qx - px) /
+                                (points[i - ps + keyOffset] - px);
                             newpoints.push(qx);
                             newpoints.push(intery + qy);
                             for (m = 2; m < ps; ++m) {
@@ -177,7 +188,10 @@ charts or filled areas).
                         // we might be able to interpolate a point below,
                         // this can give us a better y
                         if (withlines && j > 0 && otherpoints[j - otherps] != null) {
-                            bottom = qy + (otherpoints[j - otherps + accumulateOffset] - qy) * (px - qx) / (otherpoints[j - otherps + keyOffset] - qx);
+                            bottom = qy +
+                                (otherpoints[j - otherps + accumulateOffset] - qy) *
+                                (px - qx) /
+                                (otherpoints[j - otherps + keyOffset] - qx);
                         }
 
                         newpoints[l + accumulateOffset] += bottom;
@@ -193,7 +207,9 @@ charts or filled areas).
                 }
 
                 // maintain the line steps invariant
-                if (withsteps && l !== newpoints.length && l > 0 &&
+                if (withsteps &&
+                    l !== newpoints.length &&
+                    l > 0 &&
                     newpoints[l] !== null &&
                     newpoints[l] !== newpoints[l - ps] &&
                     newpoints[l + 1] !== newpoints[l - ps + 1]) {
@@ -214,7 +230,7 @@ charts or filled areas).
     $.plot.plugins.push({
         init: init,
         options: options,
-        name: 'stack',
-        version: '1.2'
+        name: "stack",
+        version: "1.2"
     });
 })(jQuery);

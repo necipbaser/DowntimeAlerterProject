@@ -4,18 +4,12 @@
     Layout = null;
 }
 <style>
-    .select2-container {
-        width: 100% !important;
-    }
+    .select2-container { width: 100% !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 10px !important;
-    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 10px !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        top: 12px !important;
-    }
-</style> 
+    .select2-container--default .select2-selection--single .select2-selection__arrow { top: 12px !important; }
+</style>
 <div class="modal-content">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
@@ -26,9 +20,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body" style="background-color: #f1f0f0">
-        <div class="row" style="color:black!important">
+        <div class="row" style="color: black !important">
             <div class="col-12">
-                <div class="kt-portlet" style=" height: 300px;">
+                <div class="kt-portlet" style="height: 300px;">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
                         <div class="kt-section">
@@ -36,37 +30,45 @@
                                 <div class="row">
                                     <table class="table table-bordered">
                                         <tr>
-                                            <td style="font-weight:700">Level</td>
+                                            <td style="font-weight: 700">Level</td>
                                             <td>
                                                 @if (Model.Level == "Warning")
                                                 {
-                                                    <span style="width: 100px;"><span class="btn btn-bold btn-sm btn-font-sm  btn-label-warning">@Model.Level</span></span>
+                                                    <span style="width: 100px;">
+                                                        <span class="btn btn-bold btn-sm btn-font-sm  btn-label-warning">@Model.Level</span>
+                                                    </span>
                                                 }
                                                 else if (Model.Level == "Information")
                                                 {
-                                                    <span style="width: 100px;"><span class="btn btn-bold btn-sm btn-font-sm  btn-label-primary">@Model.Level</span></span>
+                                                    <span style="width: 100px;">
+                                                        <span class="btn btn-bold btn-sm btn-font-sm  btn-label-primary">@Model.Level</span>
+                                                    </span>
                                                 }
                                                 else if (Model.Level == "Error")
                                                 {
-                                                    <span style="width: 100px;"><span class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">@Model.Level</span></span>
+                                                    <span style="width: 100px;">
+                                                        <span class="btn btn-bold btn-sm btn-font-sm  btn-label-danger">@Model.Level</span>
+                                                    </span>
                                                 }
                                                 else
                                                 {
-                                                    <span style="width: 100px;"><span class="btn btn-bold btn-sm btn-font-sm  btn-label-dark">@Model.Level</span></span>
+                                                    <span style="width: 100px;">
+                                                        <span class="btn btn-bold btn-sm btn-font-sm  btn-label-dark">@Model.Level</span>
+                                                    </span>
                                                 }
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight:700">Message</td>
+                                            <td style="font-weight: 700">Message</td>
                                             <td>@Model.Message</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight:700">Message Template</td>
+                                            <td style="font-weight: 700">Message Template</td>
                                             <td>@Model.MessageTemplate</td>
                                         </tr>
                                         <tr>
-                                            <td style="font-weight:700">Tİme</td>
+                                            <td style="font-weight: 700">Tİme</td>
                                             <td>@Model.TimeStamp</td>
                                         </tr>
                                     </table>

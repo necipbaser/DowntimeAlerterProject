@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DowntimeAlerter.MVC.DTO
 {
@@ -13,6 +11,5 @@ namespace DowntimeAlerter.MVC.DTO
         public long IntervalTime { get; set; }
         public DateTime CheckedDate { get; set; }
         public IEnumerable<SiteEmailDTO> SiteEmails { get; set; }
-
     }
 }

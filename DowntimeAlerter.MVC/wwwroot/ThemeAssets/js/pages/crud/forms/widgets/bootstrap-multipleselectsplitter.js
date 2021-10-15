@@ -1,17 +1,17 @@
 // Class definition
 
-var KTBootstrapMultipleSelectsplitter = function () {
-    
+var KTBootstrapMultipleSelectsplitter = function() {
+
     // Private functions
-    var demos = function () {
+    var demos = function() {
         // minimum setup
-        $('#kt_multipleselectsplitter_1, #kt_multipleselectsplitter_2').multiselectsplitter();
-    }
+        $("#kt_multipleselectsplitter_1, #kt_multipleselectsplitter_2").multiselectsplitter();
+    };
 
     return {
         // public functions
         init: function() {
-            demos(); 
+            demos();
         }
     };
 }();

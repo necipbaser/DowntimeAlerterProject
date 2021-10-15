@@ -15,7 +15,7 @@ namespace DowntimeAlerter.Test
             var mapper = config.CreateMapper();
 
             //arrange act
-            SiteEmail siteEmail = new SiteEmail();
+            var siteEmail = new SiteEmail();
             siteEmail.Id = 1;
             siteEmail.SiteId = 1;
             siteEmail.Email = "necipbaser71@gmail.com";

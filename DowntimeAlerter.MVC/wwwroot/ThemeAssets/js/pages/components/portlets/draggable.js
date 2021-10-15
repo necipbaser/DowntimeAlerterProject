@@ -1,17 +1,17 @@
 "use strict";
 
-var KTPortletDraggable = function () {
+var KTPortletDraggable = function() {
 
     return {
         //main function to initiate the module
-        init: function () {
+        init: function() {
             $("#kt_sortable_portlets").sortable({
                 connectWith: ".kt-portlet__head",
                 items: ".kt-portlet",
                 opacity: 0.8,
-                handle : '.kt-portlet__head',
+                handle: ".kt-portlet__head",
                 coneHelperSize: true,
-                placeholder: 'kt-portlet--sortable-placeholder',
+                placeholder: "kt-portlet--sortable-placeholder",
                 forcePlaceholderSize: true,
                 tolerance: "pointer",
                 helper: "clone",
@@ -23,7 +23,7 @@ var KTPortletDraggable = function () {
                 update: function(b, c) {
                     if (c.item.prev().hasClass("kt-portlet--sortable-empty")) {
                         c.item.prev().before(c.item);
-                    }                    
+                    }
                 }
             });
         }

@@ -1,5 +1,5 @@
-﻿using DowntimeAlerter.Core.Repositories;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DowntimeAlerter.Core.Repositories;
 
 namespace DowntimeAlerter.Core
 {

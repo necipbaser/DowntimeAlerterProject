@@ -2,18 +2,12 @@
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.MVC.DTO;
 using DowntimeAlerter.MVC.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace DowntimeAlerter.Test
 {
     public class SiteModelMappingTests
     {
-
         [Fact]
         public void Site_To_SiteDTO_Model_Mapper_Check()
         {
@@ -21,7 +15,7 @@ namespace DowntimeAlerter.Test
             var mapper = config.CreateMapper();
 
             //arrange act
-            Site site = new Site();
+            var site = new Site();
             site.Id = 1;
             site.Name = "New Site";
             site.Url = "https://google.com";

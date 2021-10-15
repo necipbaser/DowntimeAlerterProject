@@ -193,19 +193,19 @@ var KTjQVMapDemo = function() {
 
     var setupMap = function(name) {
         var data = {
-            map: 'world_en',
+            map: "world_en",
             backgroundColor: null,
-            color: '#ffffff',
+            color: "#ffffff",
             hoverOpacity: 0.7,
-            selectedColor: '#666666',
+            selectedColor: "#666666",
             enableZoom: true,
             showTooltip: true,
             values: sample_data,
-            scaleColors: ['#C8EEFF', '#006491'],
-            normalizeFunction: 'polynomial',
+            scaleColors: ["#C8EEFF", "#006491"],
+            normalizeFunction: "polynomial",
             onRegionOver: function(event, code) {
                 //sample to interact with map
-                if (code == 'ca') {
+                if (code == "ca") {
                     event.preventDefault();
                 }
             },
@@ -216,13 +216,13 @@ var KTjQVMapDemo = function() {
             }
         };
 
-        data.map = name + '_en';
+        data.map = name + "_en";
 
-        var map = jQuery('#kt_jqvmap_' + name);
+        var map = jQuery("#kt_jqvmap_" + name);
 
         map.width(map.parent().width());
         map.vectorMap(data);
-    }
+    };
 
     var setupMaps = function() {
         setupMap("world");
@@ -230,7 +230,7 @@ var KTjQVMapDemo = function() {
         setupMap("europe");
         setupMap("russia");
         setupMap("germany");
-    }
+    };
 
     return {
         // public functions

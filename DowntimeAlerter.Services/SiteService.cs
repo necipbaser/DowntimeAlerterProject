@@ -1,14 +1,15 @@
-﻿using DowntimeAlerter.Core;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DowntimeAlerter.Core;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DowntimeAlerter.Services
 {
     public class SiteService : ISiteService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public SiteService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

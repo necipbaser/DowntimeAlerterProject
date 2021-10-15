@@ -3,17 +3,11 @@
     Layout = null;
 }
 <style>
-    .select2-container {
-        width: 100% !important;
-    }
+    .select2-container { width: 100% !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 10px !important;
-    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 10px !important; }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        top: 12px !important;
-    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow { top: 12px !important; }
 </style>
 <div class="modal-content">
     <div class="modal-header">
@@ -25,9 +19,9 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body" style="background-color: #f1f0f0">
-        <div class="row" style="color:black!important">
+        <div class="row" style="color: black !important">
             <div class="col-md-6 col-xs-12">
-                <div class="kt-portlet" style=" height: 400px;">
+                <div class="kt-portlet" style="height: 400px;">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
                         <div class="kt-section">
@@ -35,13 +29,13 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Name <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Name <span style="color: red">*</span></label>
                                             <input class="form-control" type="text" value="" placeholder="Site name..." id="txtSiteName">
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-xs-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color: red">*</span></label>
                                             <select class="form-control" id="selectSsl">
                                                 <option value="http://">http</option>
                                                 <option value="https://">https</option>
@@ -50,7 +44,7 @@
                                     </div>
                                     <div class="col-md-9 col-xs-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Site Url <span style="color: red">*</span></label>
                                             <input class="form-control" type="text" value="" placeholder="Url..." id="txtSiteUrl" onkeyup="AddSite.UrlCheck()">
                                         </div>
                                     </div>
@@ -59,7 +53,7 @@
                                     </div>*@
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="example-text-input" class="col-form-label">Interval Time (second)<span style="color:red">*</span></label>
+                                            <label for="example-text-input" class="col-form-label">Interval Time (second)<span style="color: red">*</span></label>
                                             <input class="form-control" type="number" placeholder="Interval time..." id="txtIntervalTime">
                                         </div>
                                     </div>
@@ -70,7 +64,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xs-12">
-                <div class="kt-portlet" style=" height: 400px;">
+                <div class="kt-portlet" style="height: 400px;">
                     <div class="kt-portlet__body">
                         <!--begin::Section-->
                         <div class="kt-section">
@@ -78,7 +72,7 @@
                                 <div class="row">
                                     <div class="col-md-10 col-xs-12">
                                         <div class="form-group row">
-                                            <label class="col-form-label col-lg-2 col-sm-12">Email <span style="color:red">*</span></label>
+                                            <label class="col-form-label col-lg-2 col-sm-12">Email <span style="color: red">*</span></label>
                                             <div class="col-lg-10 col-md-10 col-sm-12">
                                                 <input type="text" value="" class="form-control" name="email" id="txtEmail" onkeyup="AddSite.RemoveSpace()" placeholder="Enter email..">
                                             </div>
@@ -95,11 +89,11 @@
                                     <div class="col-12">
                                         <table class="table table-hover">
                                             <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Email</th>
-                                                    <th style=" width: 10px;"></th>
-                                                </tr>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Email</th>
+                                                <th style="width: 10px;"></th>
+                                            </tr>
                                             </thead>
                                             <tbody id="tblAddedEmail"></tbody>
                                         </table>
@@ -112,7 +106,7 @@
             </div>
 
             <div class="col-12">
-                <button type="button" style="float:right; width:200px" class="btn btn-success" onclick="AddSite.Save()"><i class="fa fa-save"></i>Save</button>
+                <button type="button" style="float: right; width: 200px" class="btn btn-success" onclick="AddSite.Save()"><i class="fa fa-save"></i>Save</button>
             </div>
         </div>
     </div>
@@ -120,7 +114,7 @@
 <script src="~/js/Site/AddSite.js"></script>
 
 <script>
-    jQuery(document).ready(function () {
+    jQuery(document).ready(function() {
         eval("AddSite.Init();");
     });
 </script>

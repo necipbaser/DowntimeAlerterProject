@@ -1,13 +1,13 @@
 "use strict";
 
 // Class definition
-var KTScrollable = function () {
-    
+var KTScrollable = function() {
+
     // Private functions
 
     // basic demo
-    var demo1 = function () {
-    }
+    var demo1 = function() {
+    };
 
     return {
         // public functions
@@ -17,6 +17,6 @@ var KTScrollable = function () {
     };
 }();
 
-jQuery(document).ready(function() {    
+jQuery(document).ready(function() {
     KTScrollable.init();
 });

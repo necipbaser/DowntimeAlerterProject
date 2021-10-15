@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DowntimeAlerter.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using DowntimeAlerter.Core.Models;
 
 namespace DowntimeAlerter.Data.Configurations
 {

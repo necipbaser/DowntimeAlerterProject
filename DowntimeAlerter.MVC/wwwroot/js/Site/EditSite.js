@@ -1,14 +1,14 @@
 ﻿//# sourceURL=EditSite.js
 var EditSite = {
-    Init: function () {
+    Init: function() {
         EditSite.LoadFormData();
     },
-    LoadFormData: function () {
+    LoadFormData: function() {
         EditSite.GetSiteEmailList();
         var url = $("#txtEditSiteUrl").val();
-        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
+        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ""));
     },
-    GetSiteEmailList: function () {
+    GetSiteEmailList: function() {
         var siteId = $("#selectedSiteId").text();
         if (siteId == "")
             return Util.Notification.Swall("warning", "Please select a site!", "Error", "Ok", false);
@@ -18,7 +18,7 @@ var EditSite = {
         Util.BlockUI.Block("Please wait, the site is being added...");
         Util.Ajax.Generic("Site", "GetSiteEmails", EditSite.CallbackGetSiteEmailList, formData, true);
     },
-    CallbackGetSiteEmailList: function (response) {
+    CallbackGetSiteEmailList: function(response) {
         Util.BlockUI.UnBlock();
         if (response.success == true) {
             EditSite.GetSiteEmails(response.data);
@@ -26,7 +26,7 @@ var EditSite = {
             Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);
         }
     },
-    Update: function () {
+    Update: function() {
         //parameters
         var siteName = $("#txtEditSiteName").val();
         var siteUrl = $("#txtEditSiteUrl").val();
@@ -40,8 +40,12 @@ var EditSite = {
         if (siteUrl == "")
             return Util.Notification.Swall("warning", "Site Url cannot be empty!", "Error", "Ok", false);
         if (siteIntervalTime < 30)
-            return Util.Notification.Swall("warning", "The Interval Time must be greater than 30 seconds!", "Error", "Ok", false);
-        if (siteId=="")
+            return Util.Notification.Swall("warning",
+                "The Interval Time must be greater than 30 seconds!",
+                "Error",
+                "Ok",
+                false);
+        if (siteId == "")
             return Util.Notification.Swall("warning", "Please select a site!", "Error", "Ok", false);
 
         var totalUrl = selectSsl + siteUrl;
@@ -55,9 +59,9 @@ var EditSite = {
         formData.append("IntervalTime", siteIntervalTime);
         formData.append("Id", siteId);
         Util.BlockUI.Block("Please wait, the site is being added...");
-        Util.Ajax.Generic("Site", "UpdateSite", EditSite.CallbackUpdate, formData, true,"PUT");
+        Util.Ajax.Generic("Site", "UpdateSite", EditSite.CallbackUpdate, formData, true, "PUT");
     },
-    CallbackUpdate: function (response) {
+    CallbackUpdate: function(response) {
         Util.BlockUI.UnBlock();
         if (response.success == true) {
             SiteList.LoadFormData();
@@ -67,7 +71,7 @@ var EditSite = {
             return Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);
         }
     },
-    AddEmail: function () {
+    AddEmail: function() {
         var emailAdress = $("#txtEditEmail").val();
         if (emailAdress == "" || Util.EmailValidate.EmailValidate(emailAdress) != true)
             return Util.Notification.Swall("warning", "Please enter a correct e-mail address!", "Error", "Ok", false);
@@ -78,7 +82,7 @@ var EditSite = {
         Util.BlockUI.Block("Please wait, the email is added...");
         Util.Ajax.Generic("Site", "AddSiteEmail", EditSite.CallbackAddEmail, formData, true, "POST");
     },
-    CallbackAddEmail: function (response) {
+    CallbackAddEmail: function(response) {
         Util.BlockUI.UnBlock();
         if (response.success == true) {
             EditSite.GetSiteEmailList();
@@ -88,43 +92,53 @@ var EditSite = {
             return Util.Notification.Swall("warning", response.msg, "Error", "Ok", false);
         }
     },
-    DeleteEmail: function (id) {
+    DeleteEmail: function(id) {
         var formData = new FormData();
         formData.append("id", id);
-        Util.Notification.SwallOptionalParameter('warning', 'Are you sure?', 'Alert', 'Ok', true, 'Cancel', EditSite.CallBackDeleteSiteEmailAlert, null, formData);
+        Util.Notification.SwallOptionalParameter("warning",
+            "Are you sure?",
+            "Alert",
+            "Ok",
+            true,
+            "Cancel",
+            EditSite.CallBackDeleteSiteEmailAlert,
+            null,
+            formData);
     },
-    CallBackDeleteSiteEmailAlert: function (args) {
+    CallBackDeleteSiteEmailAlert: function(args) {
         var formData = args[0];
         Util.Ajax.Generic("Site", "DeleteSiteEmail", EditSite.CallBackDeleteSiteEmail, formData, true, "DELETE");
     },
-    CallBackDeleteSiteEmail: function (response) {
+    CallBackDeleteSiteEmail: function(response) {
         if (response.success == true) {
             Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
             EditSite.GetSiteEmailList();
             return Util.Notification.Swall("success", "The site email was deleted.", "Info", "Ok", false);
         }
     },
-    GetSiteEmails: function (data) {
-        var html = '';
-        if (data.length<1)
+    GetSiteEmails: function(data) {
+        var html = "";
+        if (data.length < 1)
             $("#tblEditSiteEmails").html(html);
         else {
             for (var i = 0; i < data.length; i++) {
-                html += '<tr>';
-                html += '<td>' + (i + 1) + '</td>';
-                html += '<td>' + data[i].email + '</td>';
-                html += '<td>';
-                html += '<a style="height:18px;" onclick="EditSite.DeleteEmail(`' + data[i].id + '`)" class="btn btn-lg btn-clean btn-icon btn-icon-lg" title="Delete"> <i style="color:#e41dc2;" class="fa fa-trash-alt"></i></a>';
-                html += '</button>';
-                html += '</td>';
-                html += '</tr>';
+                html += "<tr>";
+                html += "<td>" + (i + 1) + "</td>";
+                html += "<td>" + data[i].email + "</td>";
+                html += "<td>";
+                html += '<a style="height:18px;" onclick="EditSite.DeleteEmail(`' +
+                    data[i].id +
+                    '`)" class="btn btn-lg btn-clean btn-icon btn-icon-lg" title="Delete"> <i style="color:#e41dc2;" class="fa fa-trash-alt"></i></a>';
+                html += "</button>";
+                html += "</td>";
+                html += "</tr>";
             }
             $("#tblEditSiteEmails").html(html);
         }
     },
-    UrlCheck: function () {
+    UrlCheck: function() {
         var url = $("#txtEditSiteUrl").val();
-        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
+        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ""));
 
         var siteUrl = $("#txtSiteUrl").val();
         var selectSsl = $("#selectSsl").val();

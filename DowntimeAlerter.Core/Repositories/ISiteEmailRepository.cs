@@ -1,6 +1,6 @@
-﻿using DowntimeAlerter.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DowntimeAlerter.Core.Models;
 
 namespace DowntimeAlerter.Core.Repositories
 {
@@ -10,6 +10,5 @@ namespace DowntimeAlerter.Core.Repositories
         Task<SiteEmail> GetWithSiteByIdAsync(int id);
         Task<IEnumerable<SiteEmail>> GetAllWithSiteBySiteIdAsync(int siteId);
         Task<IEnumerable<SiteEmail>> GetAllSiteEmailByEmail(SiteEmail siteEmail);
-
     }
 }

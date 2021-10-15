@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using DowntimeAlerter.Core;
 using DowntimeAlerter.Core.Services;
@@ -13,7 +9,6 @@ using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,12 +24,15 @@ namespace DowntimeAlerter.MVC
         }
 
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddDbContext<DowntimeAlerterDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"), x => x.MigrationsAssembly("DowntimeAlerter.Data")));
+            services.AddDbContext<DowntimeAlerterDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DevConnection"),
+                    x => x.MigrationsAssembly("DowntimeAlerter.Data")));
 
             services.AddTransient<ISiteEmailService, SiteEmailService>();
             services.AddTransient<ISiteService, SiteService>();
@@ -49,10 +47,12 @@ namespace DowntimeAlerter.MVC
             services.AddSingleton<IHttpContextAccessor,
                 HttpContextAccessor>();
 
-            services.AddHangfire(x =>x.UseSqlServerStorage("Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            services.AddHangfire(x =>
+                x.UseSqlServerStorage(
+                    "Server=(localdb)\\MSSQLLocalDB;Database=DowntimeAlerter;Trusted_Connection=True;MultipleActiveResultSets=true"));
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -64,6 +64,7 @@ namespace DowntimeAlerter.MVC
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -71,8 +72,8 @@ namespace DowntimeAlerter.MVC
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
