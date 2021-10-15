@@ -48,10 +48,9 @@ namespace DowntimeAlerter.Data
             builder.Entity<SiteEmail>().HasData(
                 new SiteEmail { Id = 2, Email = "necipbaser71@gmail.com", SiteId = 2 });
 
-            string hashedPasword = SecurePasswordHasher.Hash("4*!Vf2");
-
+            string md5Password = SecurePasswordHasher.CalculateMD5Hash("4*!Vf2");
             builder.Entity<User>().HasData(
-                new User { Id = 1, Name = "Necip Baser", UserName = "user", Password = hashedPasword }
+                new User { Id = 1, Name = "Necip Baser", UserName = "user", Password = md5Password }
             );
         }
     }

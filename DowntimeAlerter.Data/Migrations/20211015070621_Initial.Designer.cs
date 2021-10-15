@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DowntimeAlerter.Data.Migrations
 {
     [DbContext(typeof(DowntimeAlerterDbContext))]
-    [Migration("20211014152148_Initial")]
+    [Migration("20211015070621_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,6 +65,9 @@ namespace DowntimeAlerter.Data.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
+                    b.Property<int>("NotificationType")
+                        .HasColumnType("int");
+
                     b.Property<string>("SiteName")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -104,14 +107,14 @@ namespace DowntimeAlerter.Data.Migrations
                         new
                         {
                             Id = 1,
-                            IntervalTime = 60L,
+                            IntervalTime = 40L,
                             Name = "Google",
                             Url = "https://google.com"
                         },
                         new
                         {
                             Id = 2,
-                            IntervalTime = 70L,
+                            IntervalTime = 30L,
                             Name = "Down Site Example",
                             Url = "https://example.org/impolite"
                         });
@@ -188,7 +191,7 @@ namespace DowntimeAlerter.Data.Migrations
                         {
                             Id = 1,
                             Name = "Necip Baser",
-                            Password = "$MYHASH$V1$10000$RF6L72YL97FCEHbrmlNcTMyByddGcIDOslSZLYa5qsqgIFAw",
+                            Password = "4F119737B3C2B64CB35E4B5A7618E2D0",
                             UserName = "user"
                         });
                 });

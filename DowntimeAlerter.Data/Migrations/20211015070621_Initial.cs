@@ -75,33 +75,33 @@ namespace DowntimeAlerter.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                    name: "Logs",
-                    columns: table => new
-                    {
-                        Id = table.Column<int>(type: "int", nullable: false)
-                            .Annotation("SqlServer:Identity", "1, 1"),
-                        Message = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-                        MessageTemplate = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-                        Level = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-                        TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                        Exception = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
-                        Properties = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true)
-                    });
+                name: "Logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Message = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                    MessageTemplate = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                    Level = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Exception = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true),
+                    Properties = table.Column<string>(type: "nvarchar(MAX)", maxLength: int.MaxValue, nullable: true)
+                });
 
             migrationBuilder.InsertData(
                 table: "Sites",
                 columns: new[] { "Id", "IntervalTime", "Name", "Url" },
-                values: new object[] { 1, 20, "Google", "https://google.com" });
+                values: new object[] { 1, 40L, "Google", "https://google.com" });
 
             migrationBuilder.InsertData(
                 table: "Sites",
                 columns: new[] { "Id", "IntervalTime", "Name", "Url" },
-                values: new object[] { 2, 30, "Down Site Example", "https://example.org/impolite" });
+                values: new object[] { 2, 30L, "Down Site Example", "https://example.org/impolite" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "Password", "UserName" },
-                values: new object[] { 1, "Necip Baser", "$MYHASH$V1$10000$RF6L72YL97FCEHbrmlNcTMyByddGcIDOslSZLYa5qsqgIFAw", "user" });
+                values: new object[] { 1, "Necip Baser", "4F119737B3C2B64CB35E4B5A7618E2D0", "user" });
 
             migrationBuilder.InsertData(
                 table: "SiteEmails",

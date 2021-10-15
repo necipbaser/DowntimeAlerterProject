@@ -18,6 +18,7 @@ using MailKit.Net.Smtp;
 using Hangfire.Storage;
 using DowntimeAlerter.Core.Utilities;
 using DowntimeAlerter.Core.Enums;
+using DowntimeAlerter.Services;
 
 namespace DowntimeAlerter.MVC.Controllers
 {

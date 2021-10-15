@@ -42,12 +42,11 @@ namespace DowntimeAlerter.MVC.Controllers
                 var user = _mapper.Map<UserDTO, User>(model);
                 try
                 {
+                    string md5Password = SecurePasswordHasher.CalculateMD5Hash(model.Password);
+                    user.Password = md5Password;
                     var returnUser = await _userService.GetUserAsync(user);
-                    string hashedPassword = SecurePasswordHasher.Hash(model.Password);
-                    bool passwordIsCorrect = SecurePasswordHasher.Verify(model.Password, hashedPassword);
-                    if (returnUser != null && passwordIsCorrect)
+                    if (returnUser != null)
                     {
-                        //add cookie and return
                         CookieOptions option = new CookieOptions();
                         option.Expires = DateTime.Now.AddMinutes(60);
                         Response.Cookies.Append(ProjectConstants.CookieName, returnUser.Id.ToString(), option);
