@@ -19,9 +19,9 @@ In this project used;
 
 For Login;
 
-UserName: user
+**`UserName`**: user
 
-Password: 4*!Vf2
+**`Password`**: 4*!Vf2
 
 App screenshots;
 
