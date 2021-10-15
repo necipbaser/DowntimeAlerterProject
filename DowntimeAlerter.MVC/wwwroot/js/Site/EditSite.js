@@ -5,6 +5,8 @@ var EditSite = {
     },
     LoadFormData: function () {
         EditSite.GetSiteEmailList();
+        var url = $("#txtEditSiteUrl").val();
+        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
     },
     GetSiteEmailList: function () {
         var siteId = $("#selectedSiteId").text();
@@ -37,8 +39,8 @@ var EditSite = {
             return Util.Notification.Swall("warning", "Site name cannot be empty!", "Error", "Ok", false);
         if (siteUrl == "")
             return Util.Notification.Swall("warning", "Site Url cannot be empty!", "Error", "Ok", false);
-        if (siteIntervalTime < 60)
-            return Util.Notification.Swall("warning", "The Interval Time must be greater than 60 seconds!", "Error", "Ok", false);
+        if (siteIntervalTime < 30)
+            return Util.Notification.Swall("warning", "The Interval Time must be greater than 30 seconds!", "Error", "Ok", false);
         if (siteId=="")
             return Util.Notification.Swall("warning", "Please select a site!", "Error", "Ok", false);
 
@@ -119,5 +121,21 @@ var EditSite = {
             }
             $("#tblEditSiteEmails").html(html);
         }
-    }
+    },
+    UrlCheck: function () {
+        var url = $("#txtEditSiteUrl").val();
+        $("#txtEditSiteUrl").val(url.replace(/(^\w+:|^)\/\//, ''));
+
+        var siteUrl = $("#txtSiteUrl").val();
+        var selectSsl = $("#selectSsl").val();
+        var totalUrl = selectSsl + siteUrl;
+
+        if (Util.UrlChecker.UrlChecker(totalUrl)) {
+            $("#urlCheckIcon").removeClass("flaticon2-cross").addClass("flaticon2-check-mark");
+            $("#urlCheckIcon").css("color", "green");
+        } else {
+            $("#urlCheckIcon").removeClass("flaticon2-check-mark").addClass("flaticon2-cross");
+            $("#urlCheckIcon").css("color", "red");
+        }
+    },
 }
