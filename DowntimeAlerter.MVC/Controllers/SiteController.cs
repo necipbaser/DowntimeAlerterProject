@@ -98,6 +98,9 @@ namespace DowntimeAlerter.MVC.Controllers
                         return Json(new {success = false, msg = "Incorrect email format!"});
 
                 var siteToCreate = _mapper.Map<SiteDTO, Site>(model);
+                var siteChecked = _siteService.GetSiteByUrl(siteToCreate);
+                if(siteChecked.Result!=null)
+                    return Json(new { success = false, msg = "The Url as already added!" });
                 var newSite = await _siteService.CreateSite(siteToCreate);
                 if (newSite != null)
                     return Json(new {success = true, msg = "The site was added."});

@@ -20,5 +20,11 @@ namespace DowntimeAlerter.Data.Repositories
             return await DowntimeAlerterDbContext.Users
                 .Where(w => w.UserName == user.UserName && w.Password == user.Password).FirstOrDefaultAsync();
         }
+
+        public async Task<User> GetUserByUserName(User user)
+        {
+            return await DowntimeAlerterDbContext.Users
+                .Where(w => w.UserName == user.UserName).FirstOrDefaultAsync();
+        }
     }
 }

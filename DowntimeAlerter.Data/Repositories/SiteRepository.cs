@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Repositories;
@@ -27,6 +28,12 @@ namespace DowntimeAlerter.Data.Repositories
             return await DowntimeAlerterDbContext.Sites
                 .Include(a => a.SiteEmails)
                 .SingleOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task<Site> GetSiteByUrl(Site site)
+        {
+            return await DowntimeAlerterDbContext.Sites
+                .Where(w => w.Url == site.Url).FirstOrDefaultAsync();
         }
     }
 }

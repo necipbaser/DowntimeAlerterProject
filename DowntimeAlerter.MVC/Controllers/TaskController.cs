@@ -7,6 +7,7 @@ using DowntimeAlerter.Core.Enums;
 using DowntimeAlerter.Core.Models;
 using DowntimeAlerter.Core.Services;
 using DowntimeAlerter.Core.Utilities;
+using DowntimeAlerter.MVC.ActionFilters;
 using DowntimeAlerter.MVC.DTO;
 using Hangfire;
 using Hangfire.Storage;
@@ -19,6 +20,7 @@ using MimeKit;
 
 namespace DowntimeAlerter.MVC.Controllers
 {
+    [ServiceFilter(typeof(LoginFilterAttribute))]
     public class TaskController : Controller
     {
         private readonly HttpClient _httpClient;

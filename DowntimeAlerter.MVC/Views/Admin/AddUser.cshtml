@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Add User";
+    Layout = null;
+}
+<style>
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 10px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 12px !important;
+    }
+</style>
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            <span class="kt-portlet__head-icon">
+                <i class="flaticon-add"></i>
+            </span>Add New Site
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body" style="background-color: #f1f0f0">
+        <div class="row" style="color: black !important">
+            <div class="col-md-12 col-xs-12">
+                <div class="kt-portlet" style="height: 400px;">
+                    <div class="kt-portlet__body">
+                        <!--begin::Section-->
+                        <div class="kt-section">
+                            <div class="kt-section__content">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">User Name <span style="color: red">*</span></label>
+                                            <input class="form-control" type="text" autocomplete="off" value="" placeholder="User name..." id="txtUserName">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="example-text-input" class="col-form-label">Password <span style="color: red">*</span></label>
+                                            <input class="form-control" type="password" value="" placeholder="Password..." id="txtPassword">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="button" style="float: right; width: 200px" class="btn btn-success" onclick="AddUser.Save()"><i class="fa fa-save"></i>Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/Admin/AddUser.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+        eval("AddUser.Init();");
+    });
+</script>

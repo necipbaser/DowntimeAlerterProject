@@ -1,13 +1,13 @@
 ﻿//# sourceURL=Index.js
 var Index = {
-    Init: function() {
+    Init: function () {
         Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
         Index.LoadFormData();
     },
-    LoadFormData: function() {
-        setInterval(function() {
-                Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
-            },
+    LoadFormData: function () {
+        setInterval(function () {
+            Util.Ajax.Datatable("/NotificationLog/GetAllLogs", columns);
+        },
             20000);
     }
 };
@@ -16,7 +16,7 @@ var columns = [
         data: "id",
         title: "#",
         width: "4%",
-        render: function(data, type, row, meta) {
+        render: function (data, type, row, meta) {
             return meta.row + meta.settings._iDisplayStart + 1;
         }
     },
@@ -24,7 +24,7 @@ var columns = [
         data: "state",
         title: "Status",
         width: "4%",
-        render: function(data, type, full, meta) {
+        render: function (data, type, full, meta) {
             var returnValue = full.state;
             if (full.state == "Up")
                 returnValue =
@@ -48,7 +48,7 @@ var columns = [
         data: "notificationType",
         title: "Notification Type",
         width: "4%",
-        render: function(data, type, full, meta) {
+        render: function (data, type, full, meta) {
             var returnValue = "";
             if (full.notificationType == "1")
                 returnValue =
@@ -63,7 +63,7 @@ var columns = [
         data: "siteName",
         title: "Name",
         width: "10%",
-        render: function(data, type, full, meta) {
+        render: function (data, type, full, meta) {
             var returnValue = "<b>" + full.siteName + "</b>";
             return returnValue;
         }
@@ -77,7 +77,7 @@ var columns = [
         data: "checkedDate",
         title: "Date",
         width: "15%",
-        render: function(data, type, row) {
+        render: function (data, type, row) {
             if (type === "sort" || type === "type") {
                 return data;
             }

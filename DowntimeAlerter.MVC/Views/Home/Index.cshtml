@@ -15,7 +15,7 @@
 <link href="~/ThemeAssets/plugins/custom/datatables.net-scroller-bs4/css/scroller.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
 <link href="~/ThemeAssets/plugins/custom/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
 <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-    <div class="row" style="padding-bottom: 3%;">
+    <div class="row" style="padding-bottom: 2%;">
         <h3 style="margin: 0 auto;">Downtime Alerter Dashboard</h3>
     </div>
     <div class="row">
@@ -163,6 +163,9 @@
     });
     jQuery(document).ready(function() {
         eval("Index.Init();");
-        Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
+        if (sessionStorage.getItem("triggeredNotification") != "true") {
+            sessionStorage.setItem("triggeredNotification", "true");
+            Util.Ajax.Generic("Task", "StartRecurringNotificationJob", "", null, true, "GET");
+        }
     });
 </script>

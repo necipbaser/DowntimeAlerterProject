@@ -8,5 +8,7 @@ namespace DowntimeAlerter.Core.Repositories
     {
         Task<IEnumerable<Site>> GetAllWithSiteEmailsAsync();
         Task<Site> GetWithSiteEmailsByIdAsync(int id);
+        Task<Site> GetSiteByUrl(Site user);
+
     }
 }

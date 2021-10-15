@@ -55,7 +55,7 @@ var EditSite = {
 
         var formData = new FormData();
         formData.append("Name", siteName);
-        formData.append("Url", siteUrl);
+        formData.append("Url", totalUrl);
         formData.append("IntervalTime", siteIntervalTime);
         formData.append("Id", siteId);
         Util.BlockUI.Block("Please wait, the site is being added...");

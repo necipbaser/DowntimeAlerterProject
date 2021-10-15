@@ -46,5 +46,10 @@ namespace DowntimeAlerter.Services
             siteToBeUpdated.Url = site.Url;
             await _unitOfWork.CommitAsync();
         }
+
+        public async Task<Site> GetSiteByUrl(Site site)
+        {
+            return await _unitOfWork.Sites.GetSiteByUrl(site);
+        }
     }
 }
