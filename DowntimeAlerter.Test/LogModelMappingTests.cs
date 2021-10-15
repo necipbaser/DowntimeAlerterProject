@@ -10,7 +10,7 @@ namespace DowntimeAlerter.Test
     public class LogModelMappingTests
     {
         [Fact]
-        public void User_To_UserDTO_Model_Mapper_Check()
+        public void Log_To_LogDTO_Model_Mapper_Check()
         {
             var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
             var mapper = config.CreateMapper();
