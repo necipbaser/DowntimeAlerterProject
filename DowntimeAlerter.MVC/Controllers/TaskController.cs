@@ -114,7 +114,7 @@ namespace DowntimeAlerter.MVC.Controllers
                     notificaitionLog.State = "Up";
                     notificaitionLog.NotificationType = NotificationType.Email;
                     SaveNotificatonLog(notificaitionLog);
-                    request.Body = message;
+                    //request.Body = message;
                 }
                 else
                 {
@@ -125,8 +125,8 @@ namespace DowntimeAlerter.MVC.Controllers
                     notificaitionLog.NotificationType = NotificationType.Email;
                     SaveNotificatonLog(notificaitionLog);
                     request.Body = message;
+                    SendEmail(request);
                 }
-                SendEmail(request);
             }
         }
 
