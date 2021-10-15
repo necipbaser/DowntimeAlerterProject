@@ -25,7 +25,14 @@ For Login;
 
 App screenshots;
 
+**`Login Screen`**
 ![alt text](https://user-images.githubusercontent.com/22480128/137471360-41a7c6d7-d04c-496a-877e-fda99537c341.png)
+
+**`Home Page - DashBoard`**
+![alt text](https://user-images.githubusercontent.com/22480128/137472789-df4422fb-f513-453e-a5eb-1f1d5dbe87f0.png)
+
+**`Sites page - Add/Delete/Edit Site and Email Address(1 site to many email address)`**
+![alt text](https://user-images.githubusercontent.com/22480128/137471396-2f64c980-5c99-4f1e-82b1-780a0ac3877e.png)
 
 
 For Add New Site: localhost:yourport/Site
